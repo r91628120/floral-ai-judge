@@ -6,213 +6,314 @@
   <title>AI花藝評審教練｜入口網站</title>
   <meta name="description" content="讓學生在比賽前，已經被 AI 評審訓練過 100 次。上傳花藝作品，立即獲得競賽等級評分與專業講評。" />
   <style>
-    :root{
-      --bg:#f7f4ee;
-      --bg2:#efe6d8;
-      --card:#fffdf9;
-      --ink:#2f2a24;
-      --muted:#6d655b;
-      --gold:#c8a86b;
-      --gold-deep:#9b793f;
-      --line:#e8dcc9;
-      --green:#5e7758;
-      --green-soft:#eef4ec;
-      --shadow:0 18px 40px rgba(71,50,16,.10);
-      --radius:24px;
-      --hero-radius:34px;
-      --max:1160px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at top right, rgba(200,168,107,.18), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(94,119,88,.10), transparent 22%),
-        linear-gradient(180deg, #faf7f1 0%, var(--bg) 48%, #f3eee6 100%);
-      line-height:1.75;
-    }
-    img{max-width:100%;display:block}
-    a{text-decoration:none;color:inherit}
-    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
-    .section{padding:76px 0}
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      background:#f5ead7;border:1px solid #ead7b2;color:var(--gold-deep);
-      padding:9px 14px;border-radius:999px;font-weight:800;font-size:.92rem;letter-spacing:.02em
-    }
-    .nav{
-      position:sticky;top:0;z-index:20;
-      backdrop-filter: blur(16px);
-      background:rgba(250,247,241,.76);
-      border-bottom:1px solid rgba(232,220,201,.75);
-    }
-    .nav-inner{
-      max-width:var(--max);margin:0 auto;padding:14px 24px;
-      display:flex;align-items:center;justify-content:space-between;gap:20px
-    }
-    .brand{display:flex;align-items:center;gap:14px;font-weight:900}
-    .brand-mark{
-      width:48px;height:48px;border-radius:18px;
-      background:linear-gradient(135deg,#f6ead0,#d9ba80 58%,#a77f45);
-      display:grid;place-items:center;color:white;font-size:24px;
-      box-shadow:var(--shadow)
-    }
-    .brand-text{line-height:1.2}
-    .brand-text small{display:block;color:var(--muted);font-weight:700}
-    .nav-links{display:flex;gap:22px;align-items:center}
-    .nav-links a{color:var(--muted);font-weight:700}
-    .nav-links a:hover{color:var(--ink)}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      border-radius:16px;padding:14px 20px;font-weight:900;transition:.2s ease;
-      border:1px solid transparent;cursor:pointer
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn-primary{
-      background:linear-gradient(135deg,var(--gold),var(--gold-deep));
-      color:white;box-shadow:var(--shadow)
-    }
-    .btn-secondary{
-      background:white;border-color:var(--line);color:var(--ink)
-    }
-    .hero{padding:36px 0 42px}
-    .hero-card{
-      position:relative;overflow:hidden;
-      background:linear-gradient(135deg, rgba(255,253,249,.98), rgba(245,239,229,.94));
-      border:1px solid var(--line);
-      border-radius:var(--hero-radius);
-      box-shadow:var(--shadow);
-      padding:52px 44px;
-      display:grid;grid-template-columns:1.12fr .88fr;gap:30px;align-items:center
-    }
-    .hero-card::before{
-      content:"";
-      position:absolute;inset:auto -90px -90px auto;width:260px;height:260px;border-radius:50%;
-      background:radial-gradient(circle, rgba(200,168,107,.22) 0%, rgba(200,168,107,0) 68%);
-      pointer-events:none;
-    }
-    h1{
-      margin:18px 0 14px;
-      font-size:clamp(2.25rem,4.6vw,4.2rem);
-      line-height:1.12;letter-spacing:-.03em
-    }
-    .lead{max-width:640px;color:var(--muted);font-size:1.06rem}
-    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-    .tiny-note{margin-top:12px;color:var(--muted);font-size:.95rem}
-    .hero-panel{
-      position:relative;
-      background:linear-gradient(180deg,#fffdf9,#f6f1e8);
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:22px;
-      min-height:450px;
-      overflow:hidden;
-    }
-    .panel-glow{
-      position:absolute;inset:-40px auto auto -30px;width:180px;height:180px;border-radius:50%;
-      background:radial-gradient(circle, rgba(94,119,88,.18), transparent 65%);
-      pointer-events:none;
-    }
-    .mock-phone{
-      position:relative;
-      background:white;
-      border:1px solid #eadfce;
-      border-radius:28px;
-      padding:18px;
-      box-shadow:0 16px 36px rgba(0,0,0,.08)
-    }
-    .screen-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-    .screen-title{font-size:1.02rem;font-weight:900}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#f5ecd9;color:var(--gold-deep);font-size:.82rem;font-weight:800}
-    .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
-    .score-item{
-      background:#fffaf3;border:1px solid #eee1ca;border-radius:18px;padding:12px 10px;text-align:center
-    }
-    .score-item b{display:block;font-size:1.18rem;color:var(--gold-deep)}
-    .mini-card{
-      margin-top:12px;background:#fcfaf6;border:1px solid var(--line);border-radius:18px;padding:14px
-    }
-    .mini-card h4{margin:0 0 8px;font-size:1rem}
-    .grid-3,.grid-2{display:grid;gap:18px}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:24px
-    }
-    .card h3{margin:0 0 8px;font-size:1.14rem}
-    .section-title{
-      font-size:clamp(1.7rem,3vw,2.4rem);
-      line-height:1.2;margin:0 0 12px;letter-spacing:-.02em
-    }
-    .section-sub{margin:0 0 24px;color:var(--muted);max-width:760px}
-    .icon{
-      width:52px;height:52px;border-radius:18px;display:grid;place-items:center;
-      background:linear-gradient(180deg,#f7eddc,#efe0bf);color:var(--gold-deep);font-size:24px;margin-bottom:12px
-    }
-    .step-num{
-      width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
-      background:#f2e4c8;color:var(--gold-deep);font-weight:900;margin-bottom:12px
-    }
-    .sample-score{
-      display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start
-    }
-    .score-box{
-      background:linear-gradient(180deg,#fffaf1,#f4ead6);
-      border:1px solid #ebdec7;border-radius:24px;padding:18px;text-align:center
-    }
-    .score-box .big{font-size:2.3rem;font-weight:900;color:var(--gold-deep);line-height:1}
-    .score-list{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
-    .score-list div{
-      background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center;font-size:.92rem
-    }
-    .score-list b{display:block;color:var(--gold-deep);font-size:1.08rem}
-    .quote{
-      padding:18px 18px 18px 20px;background:#fff8ee;border-left:4px solid var(--gold);
-      border-radius:16px;color:#65543b
-    }
-    .audience{
-      display:grid;grid-template-columns:1fr 1fr;gap:18px
-    }
-    .audience ul{padding-left:1.2rem;margin:.2rem 0 0}
-    .cta{
-      text-align:center;
-      background:linear-gradient(135deg, rgba(255,253,249,.96), rgba(244,238,228,.95));
-      border:1px solid var(--line);
-      border-radius:32px;
-      padding:42px 24px;
-      box-shadow:var(--shadow)
-    }
-    .footer{padding:32px 0 54px;color:var(--muted);font-size:.95rem}
-    .footer-line{
-      display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-      border-top:1px solid var(--line);padding-top:18px
-    }
-    .notice{
-      background:var(--green-soft);color:#50664c;border:1px solid #dfeadc;
-      padding:16px 18px;border-radius:16px
-    }
-    @media (max-width:960px){
-      .hero-card,.grid-3,.grid-2,.audience,.sample-score{grid-template-columns:1fr}
-      .nav-inner{flex-wrap:wrap}
-      .nav-links{flex-wrap:wrap;gap:14px}
-      .hero-card{padding:32px 22px}
-      .score-list{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:640px){
-      .container,.nav-inner{padding-left:18px;padding-right:18px}
-      .brand-mark{width:42px;height:42px;border-radius:15px;font-size:22px}
-      .hero{padding-top:22px}
-      .hero-panel{min-height:auto}
-      .score-grid{grid-template-columns:1fr 1fr}
-      .score-list{grid-template-columns:1fr 1fr}
-      .btn{width:100%}
-      .cta-row{flex-direction:column}
-    }
-  </style>
+  :root{
+    --bg:#faf3f3;
+    --bg2:#f4e7e8;
+    --card:#fffdfb;
+    --ink:#342b2b;
+    --muted:#7b6a6d;
+
+    --gold:#c9a56a;
+    --gold-deep:#9d7742;
+
+    --rose:#d8a3ab;
+    --rose-deep:#b97c88;
+    --rose-soft:#f5e7ea;
+
+    --line:#edd7db;
+    --green:#6b7f68;
+    --green-soft:#eef4ec;
+
+    --shadow:0 18px 40px rgba(96,64,46,.10);
+    --radius:24px;
+    --hero-radius:34px;
+    --max:1160px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at top right, rgba(216,163,171,.18), transparent 26%),
+      radial-gradient(circle at bottom left, rgba(201,165,106,.14), transparent 22%),
+      linear-gradient(180deg, #fdf7f7 0%, var(--bg) 46%, #f6eeee 100%);
+    line-height:1.75;
+  }
+
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .section{padding:76px 0}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(180deg,#f8e9ec,#f4dde1);
+    border:1px solid #e9c8cf;
+    color:var(--rose-deep);
+    padding:9px 14px;border-radius:999px;font-weight:800;font-size:.92rem;letter-spacing:.02em
+  }
+
+  .nav{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter: blur(16px);
+    background:rgba(253,247,247,.78);
+    border-bottom:1px solid rgba(237,215,219,.82);
+  }
+
+  .nav-inner{
+    max-width:var(--max);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px
+  }
+
+  .brand{display:flex;align-items:center;gap:14px;font-weight:900}
+
+  .brand-mark{
+    width:48px;height:48px;border-radius:18px;
+    background:linear-gradient(135deg,#f4dfe3,#d9b27f 58%,#b98691);
+    display:grid;place-items:center;color:white;font-size:24px;
+    box-shadow:var(--shadow)
+  }
+
+  .brand-text{line-height:1.2}
+  .brand-text small{display:block;color:var(--muted);font-weight:700}
+
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{color:var(--muted);font-weight:700}
+  .nav-links a:hover{color:var(--ink)}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    border-radius:16px;padding:14px 20px;font-weight:900;transition:.2s ease;
+    border:1px solid transparent;cursor:pointer
+  }
+
+  .btn:hover{transform:translateY(-1px)}
+
+  .btn-primary{
+    background:linear-gradient(135deg,var(--gold),var(--rose-deep));
+    color:white;box-shadow:var(--shadow)
+  }
+
+  .btn-secondary{
+    background:white;
+    border-color:var(--line);
+    color:var(--ink)
+  }
+
+  .btn-secondary:hover{
+    background:var(--rose-soft);
+    border-color:#e3bcc5;
+  }
+
+  .hero{padding:36px 0 42px}
+
+  .hero-card{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg, rgba(255,253,251,.98), rgba(248,239,240,.96));
+    border:1px solid var(--line);
+    border-radius:var(--hero-radius);
+    box-shadow:var(--shadow);
+    padding:52px 44px;
+    display:grid;grid-template-columns:1.12fr .88fr;gap:30px;align-items:center
+  }
+
+  .hero-card::before{
+    content:"";
+    position:absolute;inset:auto -90px -90px auto;width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle, rgba(216,163,171,.22) 0%, rgba(216,163,171,0) 68%);
+    pointer-events:none;
+  }
+
+  h1{
+    margin:18px 0 14px;
+    font-size:clamp(2.25rem,4.6vw,4.2rem);
+    line-height:1.12;letter-spacing:-.03em
+  }
+
+  .lead{max-width:640px;color:var(--muted);font-size:1.06rem}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .tiny-note{margin-top:12px;color:var(--muted);font-size:.95rem}
+
+  .hero-panel{
+    position:relative;
+    background:linear-gradient(180deg,#fffdfb,#f8eff0);
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:22px;
+    min-height:450px;
+    overflow:hidden;
+  }
+
+  .panel-glow{
+    position:absolute;inset:-40px auto auto -30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle, rgba(216,163,171,.16), transparent 65%);
+    pointer-events:none;
+  }
+
+  .mock-phone{
+    position:relative;
+    background:white;
+    border:1px solid #eadfce;
+    border-radius:28px;
+    padding:18px;
+    box-shadow:0 16px 36px rgba(0,0,0,.08)
+  }
+
+  .screen-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .screen-title{font-size:1.02rem;font-weight:900}
+
+  .pill{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f7e8eb;
+    color:var(--rose-deep);
+    font-size:.82rem;
+    font-weight:800
+  }
+
+  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+
+  .score-item{
+    background:#fff8f8;
+    border:1px solid #efd8dc;
+    border-radius:18px;
+    padding:12px 10px;
+    text-align:center
+  }
+
+  .score-item b{display:block;font-size:1.18rem;color:var(--rose-deep)}
+
+  .mini-card{
+    margin-top:12px;
+    background:#fffafb;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:14px
+  }
+
+  .mini-card h4{margin:0 0 8px;font-size:1rem}
+
+  .grid-3,.grid-2{display:grid;gap:18px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:24px
+  }
+
+  .card h3{margin:0 0 8px;font-size:1.14rem}
+
+  .section-title{
+    font-size:clamp(1.7rem,3vw,2.4rem);
+    line-height:1.2;margin:0 0 12px;letter-spacing:-.02em
+  }
+
+  .section-sub{margin:0 0 24px;color:var(--muted);max-width:760px}
+
+  .icon{
+    width:52px;height:52px;border-radius:18px;display:grid;place-items:center;
+    background:linear-gradient(180deg,#f8e7eb,#f2d8de);
+    color:var(--rose-deep);
+    font-size:24px;margin-bottom:12px
+  }
+
+  .step-num{
+    width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+    background:#f4dfe3;
+    color:var(--rose-deep);
+    font-weight:900;margin-bottom:12px
+  }
+
+  .sample-score{
+    display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start
+  }
+
+  .score-box{
+    background:linear-gradient(180deg,#fff9f9,#f7e8ea);
+    border:1px solid #ecd6da;
+    border-radius:24px;
+    padding:18px;
+    text-align:center
+  }
+
+  .score-box .big{font-size:2.3rem;font-weight:900;color:var(--rose-deep);line-height:1}
+
+  .score-list{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+
+  .score-list div{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px;
+    text-align:center;
+    font-size:.92rem
+  }
+
+  .score-list b{display:block;color:var(--rose-deep);font-size:1.08rem}
+
+  .quote{
+    padding:18px 18px 18px 20px;
+    background:#fff7f8;
+    border-left:4px solid var(--rose);
+    border-radius:16px;
+    color:#6a5156
+  }
+
+  .audience{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px
+  }
+
+  .audience ul{padding-left:1.2rem;margin:.2rem 0 0}
+
+  .cta{
+    text-align:center;
+    background:linear-gradient(135deg, rgba(255,253,251,.98), rgba(248,238,240,.96));
+    border:1px solid var(--line);
+    border-radius:32px;
+    padding:42px 24px;
+    box-shadow:var(--shadow)
+  }
+
+  .footer{padding:32px 0 54px;color:var(--muted);font-size:.95rem}
+
+  .footer-line{
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:18px
+  }
+
+  .notice{
+    background:#f9eff1;
+    color:#6d565b;
+    border:1px solid #ecd6da;
+    padding:16px 18px;
+    border-radius:16px
+  }
+
+  @media (max-width:960px){
+    .hero-card,.grid-3,.grid-2,.audience,.sample-score{grid-template-columns:1fr}
+    .nav-inner{flex-wrap:wrap}
+    .nav-links{flex-wrap:wrap;gap:14px}
+    .hero-card{padding:32px 22px}
+    .score-list{grid-template-columns:repeat(2,1fr)}
+  }
+
+  @media (max-width:640px){
+    .container,.nav-inner{padding-left:18px;padding-right:18px}
+    .brand-mark{width:42px;height:42px;border-radius:15px;font-size:22px}
+    .hero{padding-top:22px}
+    .hero-panel{min-height:auto}
+    .score-grid{grid-template-columns:1fr 1fr}
+    .score-list{grid-template-columns:1fr 1fr}
+    .btn{width:100%}
+    .cta-row{flex-direction:column}
+  }
+</style>
 </head>
 <body>
   <nav class="nav">
@@ -221,7 +322,7 @@
         <div class="brand-mark">✿</div>
         <div class="brand-text">
           AI花藝評審教練
-          <small>Floral AI Judge</small>
+          <small>Floral AI Judge | © 2026 凡事皆正面</small>
         </div>
       </div>
       <div class="nav-links">
@@ -248,11 +349,11 @@
             <a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" target="_blank">立即開始評分</a>
 
             <a class="btn btn-secondary" href="upload-guide.html">上傳教學</a>
-
-            <a class="btn btn-secondary" href="#" onclick="alert('進階版功能開發中，敬請期待🔥')">進階評審（即將推出）</a>
-
+           <a class="btn btn-secondary" href="#" onclick="alert('進階版功能開發中，敬請期待🔥')">進階評審（即將推出）</a>
             <a class="btn btn-secondary" href="#sample">查看示範評審</a>
           </div>
+           <div class="tiny-note">建議輸入「競賽題目」一起評審，結果會更接近正式比賽</div>
+
           <div class="tiny-note">支援單張圖片分析｜六視角（前、後、左、右、上、細節）效果最佳</div>
         </div>
 
@@ -478,7 +579,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-line">
-        <div>AI花藝評審教練｜Floral AI Judge |  © 2026 凡事皆正面</div>
+        <div>AI花藝評審教練｜Floral AI Judge | © 2026 凡事皆正面</div>
         <div>建議搭配六視角照片使用，以獲得更完整準確的分析結果。</div>
       </div>
     </div>
