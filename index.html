@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI花藝評審教練｜入口網站</title>
+<title>AI花藝評審教練平台｜入口網站</title>
 <meta content="讓學生在比賽前，已經被 AI 評審訓練過 100 次。上傳花藝作品，立即獲得競賽等級評分與專業講評。" name="description"/>
 <style>
   :root{
@@ -134,6 +134,31 @@
     font-size:clamp(2.25rem,4.6vw,4.2rem);
     line-height:1.12;letter-spacing:-.03em
   }
+
+  .hero-title{
+     margin:18px 0 10px;
+     font-size:clamp(2.2rem,4.8vw,4.4rem);
+     line-height:1.08;
+     letter-spacing:-.04em;
+     font-weight:900;
+  }
+
+  .hero-sub{
+     margin:0 0 10px;
+     font-size:clamp(1.08rem,2vw,1.45rem);
+     line-height:1.45;
+     color:var(--rose-deep);
+     font-weight:700;
+  }
+
+  .hero-tagline{
+     margin:0 0 18px;
+     font-size:1rem;
+     color:var(--muted);
+     font-weight:600;
+     letter-spacing:.01em;
+  }
+
 
   .lead{max-width:640px;color:var(--muted);font-size:1.06rem}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
@@ -314,6 +339,9 @@
     .btn{width:100%}
     .cta-row{flex-direction:column}
   }
+
+
+
 </style>
 </head>
 <body>
@@ -339,21 +367,29 @@
 <div class="container">
 <div class="hero-card">
 <div>
-<span class="badge">全台灣第一個 AI 花藝評審教練訓練版</span>
-<h1>讓學生在比賽前，<br/>已經被 AI 評審訓練過 100 次</h1>
-<p class="lead">
-            上傳花藝作品，立即獲得「競賽等級」評分與專業講評。<br/>
-            從色彩、結構、空間、焦點到創意，幫助學生用評審的眼睛重新看自己的作品。
-          </p>
-<div class="cta-row">
-<a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" id="heroStartBtn" rel="noopener noreferrer" target="_blank">立即開始評分</a>
-<a class="btn btn-secondary" href="upload-guide.html">上傳教學</a>
-<a class="btn btn-secondary" href="#" onclick="alert('進階版功能開發中，敬請期待🔥')">進階評審（即將推出）</a>
-<a class="btn btn-secondary" href="#sample">查看示範評審</a>
-</div>
-<div class="tiny-note">建議輸入「競賽題目」一起評審，結果會更接近正式比賽</div>
-<div class="tiny-note">支援單張圖片分析｜六視角（前、後、左、右、上、細節）效果最佳</div>
-<div class="tiny-note">🌸 已累計 <b id="counter">載入中…</b> 次評分</div>
+  <span class="badge">全台灣第一個 AI 花藝評審教練平台</span>
+
+  <h1 class="hero-title">AI 花藝評審教練平台</h1>
+
+  <p class="hero-sub">從作品上傳到講評回饋，打造更高效率的花藝訓練流程</p>
+
+  <p class="hero-tagline">專為花藝課堂訓練、競賽準備與作品講評設計</p>
+
+  <p class="lead">
+    上傳花藝作品，立即獲得「競賽等級」評分與專業講評。<br>
+    從色彩、結構、空間、焦點到創意，幫助學生用評審的眼睛重新看自己的作品。
+  </p>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" id="heroStartBtn" rel="noopener noreferrer" target="_blank">立即體驗 AI 評審</a>
+    <a class="btn btn-secondary" href="upload-guide.html">上傳教學</a>
+    <a class="btn btn-secondary" href="#" onclick="alert('進階版功能開發中，敬請期待🔥')">進階評審（即將推出）</a>
+    <a class="btn btn-secondary" href="#sample">查看示範評審</a>
+  </div>
+
+  <div class="tiny-note">建議輸入「競賽題目」一起評審，結果會更接近正式比賽</div>
+  <div class="tiny-note">支援單張圖片分析｜六視角（前、後、左、右、上、細節）效果最佳</div>
+  <div class="tiny-note">🌸 已累計 <b id="counter">載入中…</b> 次評分</div>
 </div>
 <div class="hero-panel">
 <div class="panel-glow"></div>
@@ -559,7 +595,7 @@
 <footer class="footer">
 <div class="container">
 <div class="footer-line">
-<div>AI花藝評審教練｜Floral AI Judge | © 2026 凡事皆正面 </div>
+<div>AI花藝評審教練平台｜Floral AI Judge | © 2026 凡事皆正面 </div>
 <div>建議搭配六視角照片使用，以獲得更完整準確的分析結果。</div>
 </div>
 </div>
