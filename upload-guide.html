@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI花藝評審教練｜上傳教學頁</title>
+  <meta name="description" content="AI花藝評審教練上傳教學頁，教你如何拍攝六視角照片並進入GPT進行評審分析。" />
+  <style>
+    :root{
+      --bg:#f7f4ee;
+      --card:#fffdf9;
+      --ink:#2f2a24;
+      --muted:#6d655b;
+      --gold:#c8a86b;
+      --gold-deep:#9b793f;
+      --line:#e8dcc9;
+      --shadow:0 18px 40px rgba(71,50,16,.10);
+      --radius:24px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(200,168,107,.15), transparent 25%),
+        linear-gradient(180deg, #faf7f1 0%, #f6f2ea 45%, #f1ece3 100%);
+      line-height:1.75;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+    .nav{
+      position:sticky;top:0;z-index:20;
+      background:rgba(250,247,241,.82);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(232,220,201,.85);
+    }
+    .nav-inner{
+      max-width:var(--max);margin:0 auto;padding:14px 24px;
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+    }
+    .brand{display:flex;align-items:center;gap:14px;font-weight:900}
+    .brand-mark{
+      width:46px;height:46px;border-radius:16px;
+      background:linear-gradient(135deg,#f6ead0,#d9ba80 58%,#a77f45);
+      display:grid;place-items:center;color:white;font-size:23px;
+      box-shadow:var(--shadow)
+    }
+    .brand small{display:block;color:var(--muted);font-weight:700}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:16px;padding:13px 18px;font-weight:900;border:1px solid transparent;
+      transition:.2s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+      color:white;box-shadow:var(--shadow)
+    }
+    .btn-secondary{
+      background:white;border-color:var(--line);color:var(--ink)
+    }
+    .hero{padding:34px 0 28px}
+    .hero-card{
+      background:linear-gradient(135deg, rgba(255,253,249,.98), rgba(245,239,229,.95));
+      border:1px solid var(--line);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      padding:42px 34px;
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#f5ead7;border:1px solid #ead7b2;color:var(--gold-deep);
+      padding:9px 14px;border-radius:999px;font-weight:800;font-size:.92rem;
+    }
+    h1{
+      margin:16px 0 12px;
+      font-size:clamp(2rem,4vw,3.6rem);
+      line-height:1.14;letter-spacing:-.02em
+    }
+    .lead{color:var(--muted);max-width:760px}
+    .section{padding:28px 0}
+    .section-title{
+      font-size:clamp(1.6rem,2.8vw,2.3rem);
+      line-height:1.2;margin:0 0 12px
+    }
+    .section-sub{color:var(--muted);margin:0 0 22px;max-width:760px}
+    .grid-2,.grid-3{display:grid;gap:18px}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:24px
+    }
+    .card h3{margin:0 0 8px;font-size:1.14rem}
+    .muted{color:var(--muted)}
+    .step{
+      display:flex;gap:16px;align-items:flex-start
+    }
+    .step-num,.shot-num{
+      flex:0 0 auto;
+      width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+      background:#f2e4c8;color:var(--gold-deep);font-weight:900
+    }
+    .shot-num{width:34px;height:34px}
+    .shot{
+      display:flex;gap:14px;align-items:flex-start
+    }
+    .notice{
+      padding:16px 18px;border-left:4px solid var(--gold);background:#fff7ea;border-radius:16px;color:#67563d
+    }
+    .goodbad{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px
+    }
+    .good{background:#f5fbf3;border:1px solid #d9ebd3}
+    .bad{background:#fff7f5;border:1px solid #efd9d3}
+    ul{margin:.4rem 0 0;padding-left:1.2rem}
+    .cta{
+      text-align:center;
+      background:linear-gradient(135deg, rgba(255,253,249,.96), rgba(244,238,228,.95));
+      border:1px solid var(--line);border-radius:32px;padding:40px 24px;box-shadow:var(--shadow)
+    }
+    .tiny{font-size:.95rem;color:var(--muted)}
+    code{
+      background:#fff7ea;border:1px solid #ecdcbf;border-radius:8px;padding:2px 8px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.94em
+    }
+    .footer{padding:32px 0 50px;color:var(--muted);font-size:.95rem}
+    @media (max-width:900px){
+      .grid-2,.grid-3,.goodbad{grid-template-columns:1fr}
+      .hero-card{padding:30px 22px}
+      .nav-inner{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-mark">✿</div>
+        <div>
+          AI花藝評審教練
+          <small>上傳教學頁</small>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-secondary" href="index.html">回首頁</a>
+        <a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" target="_blank" rel="noopener noreferrer">前往 AI 評審</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <span class="badge">拍對照片，評分才會準</span>
+        <h1>花藝作品上傳教學</h1>
+        <p class="lead">
+          這一頁會教你如何拍攝作品、如何整理照片、如何上傳到 GPT 進行分析。
+          只要照片拍得完整，AI 花藝評審教練就能更接近真實評審的觀察方式。
+        </p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:22px">
+          <a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" target="_blank" rel="noopener noreferrer">立即開始上傳</a>
+          <a class="btn btn-secondary" href="#angles">先看六視角拍攝法</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">使用前先記住 3 件事</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>1. 光線要穩定</h3>
+          <p class="muted">建議在自然光或明亮室內拍攝，避免過暗、逆光、偏黃或偏藍，否則 AI 會較難判斷色彩。</p>
+        </div>
+        <div class="card">
+          <h3>2. 背景要乾淨</h3>
+          <p class="muted">盡量讓作品成為畫面主體，不要有太多雜物、人物或其他作品干擾視線。</p>
+        </div>
+        <div class="card">
+          <h3>3. 角度要完整</h3>
+          <p class="muted">花藝是立體作品，只拍一張正面照，往往無法完整看出重心、空間與背面處理。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="angles">
+    <div class="container">
+      <h2 class="section-title">六視角拍攝法</h2>
+      <p class="section-sub">這是最推薦的上傳方式。六視角越完整，AI 的分析就越接近真實評審。</p>
+
+      <div class="grid-2">
+        <div class="card"><div class="shot"><div class="shot-num">1</div><div><h3>正面</h3><p class="muted">站在作品主要觀賞面正前方拍攝。畫面要包含整件作品與花器，不要切掉上下邊緣。</p></div></div></div>
+        <div class="card"><div class="shot"><div class="shot-num">2</div><div><h3>左側</h3><p class="muted">從左側 90 度拍攝，幫助 AI 觀察結構厚度、左右平衡與線條延伸。</p></div></div></div>
+        <div class="card"><div class="shot"><div class="shot-num">3</div><div><h3>右側</h3><p class="muted">從右側 90 度拍攝，讓 AI 比較左右兩邊的支撐感與重心是否一致。</p></div></div></div>
+        <div class="card"><div class="shot"><div class="shot-num">4</div><div><h3>背面</h3><p class="muted">從作品後方拍攝。很多作品正面看起來完整，但背面容易空掉或凌亂，這張很重要。</p></div></div></div>
+        <div class="card"><div class="shot"><div class="shot-num">5</div><div><h3>上視圖</h3><p class="muted">從上方俯拍，可幫助判斷焦點聚合、花材分布與前後左右的空間層次。</p></div></div></div>
+        <div class="card"><div class="shot"><div class="shot-num">6</div><div><h3>細節圖</h3><p class="muted">近距離拍攝主花、焦點區或關鍵結構，讓 AI 看清楚花材交接與細節處理。</p></div></div></div>
+      </div>
+
+      <div class="notice" style="margin-top:18px">
+        沒有六視角也可以分析，但若只提供單張照片，AI 只能依目前可見部分判斷，立體結構與背面處理可能無法完全準確。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">拍攝時的建議做法</h2>
+      <div class="goodbad">
+        <div class="card good">
+          <h3>建議這樣做</h3>
+          <ul class="muted">
+            <li>把手機鏡頭擦乾淨再拍</li>
+            <li>一次拍完整件作品，不要太近</li>
+            <li>拍完先檢查是否清楚再上傳</li>
+            <li>每一張都用相近距離與高度拍攝</li>
+            <li>讓背景保持簡單，作品置中</li>
+          </ul>
+        </div>
+        <div class="card bad">
+          <h3>盡量避免</h3>
+          <ul class="muted">
+            <li>逆光拍攝，讓作品整體太暗</li>
+            <li>距離太近，只看到局部</li>
+            <li>照片模糊、晃動、失焦</li>
+            <li>背景太亂，影響判斷</li>
+            <li>只拍正面，就直接要求完整評分</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">如何在 GPT 中上傳作品？</h2>
+      <div class="grid-2">
+        <div class="card"><div class="step"><div class="step-num">1</div><div><h3>打開 AI 花藝評審教練</h3><p class="muted">點擊本頁的「前往 AI 評審」按鈕，會開啟你的 GPT 頁面。</p></div></div></div>
+        <div class="card"><div class="step"><div class="step-num">2</div><div><h3>一次選取多張照片</h3><p class="muted">在聊天輸入框旁邊點圖片上傳，建議一次選 6 張照片，依序放入六視角。</p></div></div></div>
+        <div class="card"><div class="step"><div class="step-num">3</div><div><h3>貼上簡短說明</h3><p class="muted">可附上一句：<code>請依六視角進行完整評分與講評</code>，讓 GPT 更快進入評審模式。</p></div></div></div>
+        <div class="card"><div class="step"><div class="step-num">4</div><div><h3>查看結果並回頭修正作品</h3><p class="muted">重點不是只看分數，而是要看「三個主要問題」與「具體改進建議」。</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">建議複製的上傳文字</h2>
+      <p class="section-sub">你可以把下面這段文字直接複製，貼到 GPT 對話框中，再一起上傳照片。</p>
+      <div class="card">
+        <div style="background:#fff8ee;border:1px solid #ead8bd;border-radius:18px;padding:18px">
+          請依我上傳的六視角照片，從色彩、比例與結構、空間與動線、焦點與主題、創意與表現五個面向，進行完整評分與評審講評，並告訴我三個主要優點、三個主要問題，以及至少三點具體改進建議。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <h2 class="section-title">準備好了，就開始上傳作品</h2>
+        <p class="section-sub" style="margin:0 auto 22px">
+          拍對照片，比多拍照片更重要。<br>
+          當角度完整、畫面清楚，AI 才能更像真正的評審在看你的作品。
+        </p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" target="_blank" rel="noopener noreferrer">前往 AI 評審</a>
+          <a class="btn btn-secondary" href="index.html">回首頁</a>
+        </div>
+        <div class="tiny" style="margin-top:14px">建議使用手機拍攝後直接上傳，流程最順。</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      AI花藝評審教練｜上傳教學頁
+    </div>
+  </footer>
+</body>
+</html>
