@@ -5,7 +5,27 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>AI花藝評審教練平台｜入口網站</title>
+<meta name="app-version" content="2026-04-09a">
 <meta content="讓學生在比賽前，已經被 AI 評審訓練過 100 次。上傳花藝作品，立即獲得競賽等級評分與專業講評。" name="description"/>
+
+<meta name="keywords" content="AI花藝評審, 花藝評審教練, 花藝競賽, 花藝訓練, 花藝教學, AI評審, Floral AI Judge, 花藝作品評分">
+<meta name="author" content="凡事皆正面">
+<meta name="robots" content="index, follow">
+<meta name="app-version" content="2026-04-09a">
+
+<link rel="canonical" href="https://r91628120.github.io/floral-ai-judge/index.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI花藝評審教練平台｜入口網站">
+<meta property="og:description" content="上傳花藝作品，立即獲得競賽等級評分與專業講評，幫助學生用評審的眼睛重新看自己的作品。">
+<meta property="og:url" content="https://r91628120.github.io/floral-ai-judge/index.html">
+<meta property="og:site_name" content="AI花藝評審教練平台">
+<meta property="og:locale" content="zh_TW">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI花藝評審教練平台｜入口網站">
+<meta name="twitter:description" content="上傳花藝作品，立即獲得競賽等級評分與專業講評。">
+
 <style>
   :root{
     --bg:#faf3f3;
@@ -343,6 +363,22 @@
 
 
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI花藝評審教練平台",
+  "url": "https://r91628120.github.io/floral-ai-judge/index.html",
+  "description": "上傳花藝作品，立即獲得競賽等級評分與專業講評，幫助學生用評審的眼睛重新看自己的作品。",
+  "inLanguage": "zh-Hant",
+  "publisher": {
+    "@type": "Organization",
+    "name": "凡事皆正面"
+  }
+}
+</script>
+
 </head>
 <body>
 <nav class="nav">
@@ -389,7 +425,7 @@
 
   <div class="tiny-note">建議輸入「競賽題目」一起評審，結果會更接近正式比賽</div>
   <div class="tiny-note">支援單張圖片分析｜六視角（前、後、左、右、上、細節）效果最佳</div>
-  <div class="tiny-note">🌸 已累計 <b id="counter">載入中…</b> 次評分</div>
+  <div class="tiny-note">🌸 已累計 <b id="counterValue">載入中…</b> 次評分</div>
 </div>
 <div class="hero-panel">
 <div class="panel-glow"></div>
@@ -596,7 +632,7 @@
   <div class="container">
     <div class="footer-line">
       <div>
-        AI花藝評審教練平台｜Floral AI Judge | © 2026 凡事皆正面 <br>
+       AI花藝評審教練平台｜Floral AI Judge | © 2026 凡事皆正面 | 版本 v2026-04-09a <br>
         <a href="privacy.html" style="color:#b97c88; font-weight:800;">
           🔒 隱私權與資料說明
         </a>
@@ -609,45 +645,68 @@
   </div>
 </footer>
 
-<script>const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyBLM797rR2rCv5hRTL6npDRbIvMIM5hxBOTAenkJ43evEeFupNTyPL20xU5aEiuHgBtQ/exec";
-const ENABLE_COUNTER = true;
+<script>
+const GAS_URL = "https://script.google.com/macros/s/AKfycbz2E6G3CmK_g8xwBuCByRWoIpXKmCSG6wyVh6aI1G-HXxkYmqJdQNrVTVZsPAqJ_0QRqQ/exec";
+const SITE = 'floral-ai-judge';
+const VERSION = '2026-04-09a';
 
-async function fetchCounter() {
-  if (!ENABLE_COUNTER) return;
+async function loadCounter() {
   try {
-    const url = GAS_WEB_APP_URL + "?action=get&site=floral-ai-judge&ts=" + Date.now();
-    const res = await fetch(url, { cache: "no-store" });
-    const data = await res.json().catch(() => ({}));
-    const el = document.getElementById("counter");
-    if (el) el.textContent = data.count ?? "0";
-  } catch (e) {
-    const el = document.getElementById("counter");
-    if (el) el.textContent = "0";
+    const res = await fetch(`${GAS_URL}?action=get&site=${encodeURIComponent(SITE)}&t=${Date.now()}`, {
+      method: 'GET',
+      cache: 'no-store'
+    });
+    const data = await res.json();
+
+    const el = document.getElementById('counterValue');
+    if (!el) return;
+
+    if (data.ok) {
+      el.textContent = data.count;
+    } else {
+      el.textContent = '讀取失敗';
+      console.error('讀取計數失敗:', data);
+    }
+  } catch (err) {
+    const el = document.getElementById('counterValue');
+    if (el) el.textContent = '讀取失敗';
+    console.error('讀取 GAS 失敗:', err);
   }
 }
 
-async function bumpCounterOnce() {
-  if (!ENABLE_COUNTER) return;
+function incrementCounterOnce() {
   try {
-    const url = GAS_WEB_APP_URL + "?action=increment&site=floral-ai-judge&ts=" + Date.now();
+    const url = `${GAS_URL}?action=increment&site=${encodeURIComponent(SITE)}&t=${Date.now()}`;
+
     if (navigator.sendBeacon) {
       navigator.sendBeacon(url);
     } else {
-      fetch(url, { method: "GET", cache: "no-store", keepalive: true });
-    }
-  } catch (e) {}
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  fetchCounter();
-
-  ["navStartBtn", "heroStartBtn", "bottomStartBtn"].forEach((id) => {
-    const btn = document.getElementById(id);
-    if (btn) {
-      btn.addEventListener("click", () => {
-        bumpCounterOnce();
+      fetch(url, {
+        method: 'GET',
+        cache: 'no-store',
+        keepalive: true
+      }).catch((err) => {
+        console.error('累加失敗:', err);
       });
     }
+  } catch (err) {
+    console.error('累加 GAS 失敗:', err);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadCounter();
+
+  ['navStartBtn', 'heroStartBtn', 'bottomStartBtn'].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      incrementCounterOnce();
+    });
   });
-});</script></body>
+});
+console.log('Floral AI Judge version:', VERSION);
+</script>
+</body>
 </html>
