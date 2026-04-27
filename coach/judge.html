@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 評審 | AI 花藝設計訓練平台 | Flora Coach AI</title>
+  <meta name="description" content="Flora Coach AI AI評審頁面，上傳花藝作品圖片，取得構圖、色彩、焦點、花材層次與市場感分析。" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+</head>
+<body data-page="judge">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">🌸</div>
+        <div><div class="brand-en">Flora Coach AI</div><div class="brand-zh">AI 花藝設計訓練平台</div></div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">回首頁</a>
+        <a href="generate.html">設計預演</a>
+        <a href="judge.html">AI 評審</a>
+        <a href="judge.html" class="nav-cta">開始評審</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">AI Judge & Coach</div>
+        <h1>AI 花藝作品評審</h1>
+        <p>上傳你的花藝作品照片，讓 AI 從主題表現、構圖平衡、色彩和諧、焦點設計、花材層次與整體完成度進行分析。這版已可把評審結果帶到 optimize.html。</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="container workspace-grid-2">
+        <aside class="panel form-panel">
+          <h2 class="panel-title">上傳與評審設定</h2>
+          <p class="panel-desc">圖片與補充條件越清楚，AI 給出的評析方向會越貼近你的需求。</p>
+          <div class="form-group">
+            <label class="form-label">作品圖片</label>
+            <div class="uploader">
+              <label for="imageUpload" class="upload-btn">選擇作品圖片</label>
+              <input type="file" id="imageUpload" accept="image/*" />
+              <div class="upload-note">支援 JPG / PNG / WEBP，建議上傳清晰、正面、光線穩定的作品照片。</div>
+            </div>
+            <div class="preview-box" id="previewBox">
+              <img id="previewImage" alt="作品預覽" />
+              <div class="preview-meta" id="previewMeta">尚未選擇檔案</div>
+            </div>
+          </div>
+          <div class="form-group"><label class="form-label" for="workTheme">作品主題 / 題目</label><input type="text" id="workTheme" placeholder="例如：春日婚禮桌花、道路與隧道主題花藝、競賽訓練作品" /><span class="form-hint">若是競賽題目，建議務必填寫。</span></div>
+          <div class="form-group">
+            <label class="form-label" for="judgeMode">評審模式</label>
+            <select id="judgeMode">
+              <option value="general">一般教練模式</option>
+              <option value="contest">競賽評審模式</option>
+              <option value="market">市場導向模式</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label" for="flowerInfo">花材 / 結構補充</label><input type="text" id="flowerInfo" placeholder="例如：玫瑰、火鶴、文心蘭、枝材、金屬結構" /></div>
+          <div class="form-group"><label class="form-label" for="judgeNote">希望 AI 特別注意的地方</label><textarea id="judgeNote" placeholder="例如：請特別看構圖是否失衡、主花焦點是否明確、主題表現是否足夠、是否具市場感"></textarea></div>
+          <div class="form-group">
+            <label class="form-label">快速帶入範例</label>
+            <div class="quick-tags">
+              <button type="button" class="quick-tag" data-example-judge="general">一般作品</button>
+              <button type="button" class="quick-tag" data-example-judge="contest">競賽訓練</button>
+              <button type="button" class="quick-tag" data-example-judge="road">道路／隧道題目</button>
+              <button type="button" class="quick-tag" data-example-judge="market">商業花禮</button>
+            </div>
+          </div>
+          <div class="action-row">
+            <button type="button" class="btn btn-primary" id="judgeBtn">開始 AI 評審分析</button>
+            <button type="button" class="btn btn-secondary" id="resetJudgeBtn">清空內容</button>
+          </div>
+          <div class="status-bar" id="statusBar">AI 模擬評審完成，已產出完整分析結果。</div>
+        </aside>
+
+        <section class="panel">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-state-inner">
+              <div class="empty-state-icon">🏆</div>
+              <h3>等待你的作品上傳</h3>
+              <p>上傳作品圖片並填寫左側條件後，按下「開始 AI 評審分析」，右側就會顯示完整評分、優點、待改善處與修改建議。</p>
+            </div>
+          </div>
+
+          <div class="report-wrap" id="reportWrap">
+            <div class="report-top">
+              <div class="report-image-card">
+                <img id="reportImage" class="report-image" alt="評審作品圖" />
+                <div class="report-image-meta" id="reportImageMeta">作品預覽</div>
+              </div>
+              <div class="report-summary-card">
+                <div class="report-header-row">
+                  <div>
+                    <h2 class="report-title">AI 評審結果</h2>
+                    <p class="report-subtitle" id="reportSubtitle">主題與模式資訊</p>
+                  </div>
+                  <div class="total-score"><small>總分</small><strong id="totalScore">0</strong></div>
+                </div>
+                <div class="market-chip-row">
+                  <div class="market-chip" id="marketChip">市場接受度：—</div>
+                  <div class="market-chip" id="modeChip">評審模式：—</div>
+                </div>
+                <div class="summary-text" id="summaryText">這裡將顯示 AI 對作品整體完成度與方向的總結。</div>
+              </div>
+            </div>
+
+            <div class="score-grid" id="scoreGrid"></div>
+
+            <div class="analysis-grid">
+              <div class="analysis-card"><h3>作品優點</h3><div class="analysis-list" id="strengthList"></div></div>
+              <div class="analysis-card"><h3>待改善處</h3><div class="analysis-list" id="weaknessList"></div></div>
+            </div>
+
+            <div class="coach-card">
+              <h3>AI 教練建議</h3>
+              <div class="analysis-list" id="suggestionList"></div>
+              <h3 style="margin-top:20px;">綜合講評</h3>
+              <div class="coach-summary" id="coachSummary"></div>
+              <div class="coach-actions">
+                <button class="small-btn primary" id="optimizeBtn">依建議再優化</button>
+                <button class="small-btn secondary" id="copyJudgeBtn">複製評審結果</button>
+              </div>
+            </div>
+
+            <div class="prompt-box">
+              <h4>本次評審 Prompt 示意</h4>
+              <div class="prompt-text" id="promptText"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Flora Coach AI</strong><br />AI 花藝設計訓練平台</div>
+      <div>judge.html｜AI 評審頁</div>
+    </div>
+  </footer>
+</body>
+</html>

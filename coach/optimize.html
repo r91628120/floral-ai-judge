@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>作品優化再生成 | AI 花藝設計訓練平台 | Flora Coach AI</title>
+  <meta name="description" content="Flora Coach AI 作品優化頁，根據 AI 評審結果，自動整理下一輪花藝設計優化方向與再生成 prompt。" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+</head>
+<body data-page="optimize">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">🌸</div>
+        <div><div class="brand-en">Flora Coach AI</div><div class="brand-zh">AI 花藝設計訓練平台</div></div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">回首頁</a>
+        <a href="generate.html">設計預演</a>
+        <a href="judge.html">AI 評審</a>
+        <a href="optimize.html">作品優化</a>
+        <a href="optimize.html" class="nav-cta">開始優化</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Optimize & Regenerate</div>
+        <h1>作品優化再生成</h1>
+        <p>根據上一輪 AI 評審結果，把問題轉成具體可執行的下一輪優化條件。這版可將 prompt 直接帶回 generate.html，形成完整訓練循環。</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="container workspace-grid-3">
+        <aside class="panel sticky-panel">
+          <h2 class="panel-title">匯入上一輪評審重點</h2>
+          <p class="panel-desc">將上一輪作品資訊、AI 評審結論與你想保留的優點填進來，系統就會整理出下一輪優化方向。</p>
+          <div class="overview-card">
+            <h3>這一頁在做什麼？</h3>
+            <p>不是單純再生成，而是把「哪裡不足」轉成「下一輪要如何修正」，讓 AI 的每次輸出都更接近成熟作品。</p>
+          </div>
+          <div class="form-group"><label class="form-label" for="theme">作品主題 / 題目</label><input type="text" id="theme" placeholder="例如：春日婚禮桌花、道路與隧道題目、競賽花藝作品" /></div>
+          <div class="form-group"><label class="form-label" for="style">原本風格</label><input type="text" id="style" placeholder="例如：韓系自然感、競賽造型導向、現代線條感" /></div>
+          <div class="form-group"><label class="form-label" for="palette">原本色系</label><input type="text" id="palette" placeholder="例如：奶茶白、淡粉、淺綠" /></div>
+          <div class="form-group"><label class="form-label" for="flowers">原本花材</label><input type="text" id="flowers" placeholder="例如：玫瑰、火鶴、文心蘭、尤加利、枝材" /></div>
+          <div class="form-group"><label class="form-label" for="strengths">想保留的優點</label><textarea id="strengths" placeholder="例如：色彩成熟、主花焦點大致清楚、整體有市場感"></textarea><span class="form-hint">把上一輪表現不錯的部分保留下來，避免優化時整體走味。</span></div>
+          <div class="form-group"><label class="form-label" for="weaknesses">主要問題點</label><textarea id="weaknesses" placeholder="例如：右側過重、焦點不夠集中、中層銜接生硬、主題辨識度不足"></textarea></div>
+          <div class="form-group"><label class="form-label" for="goal">這一輪最想優先改善什麼？</label><textarea id="goal" placeholder="例如：讓主題更明確、讓焦點更集中、讓市場感更高、讓作品更像競賽成熟稿"></textarea></div>
+          <div class="form-group">
+            <label class="form-label" for="mode">優化方向模式</label>
+            <select id="mode">
+              <option value="balanced">平衡優化模式</option>
+              <option value="contest">競賽強化模式</option>
+              <option value="market">市場強化模式</option>
+              <option value="minimal">精緻收斂模式</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">快速帶入範例</label>
+            <div class="quick-tags">
+              <button type="button" class="quick-tag" data-example-optimize="contest">競賽修正版</button>
+              <button type="button" class="quick-tag" data-example-optimize="market">商業花禮修正版</button>
+              <button type="button" class="quick-tag" data-example-optimize="road">道路／隧道修正版</button>
+              <button type="button" class="quick-tag" data-example-optimize="minimal">精緻收斂版</button>
+            </div>
+          </div>
+          <div class="action-row">
+            <button type="button" class="btn btn-primary" id="optimizeBtn">產生優化方向</button>
+            <button type="button" class="btn btn-secondary" id="resetOptimizeBtn">清空內容</button>
+          </div>
+          <div class="status-bar" id="statusBar">優化方向已整理完成，已產出下一輪再生成 prompt。</div>
+        </aside>
+
+        <section class="panel">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-state-inner">
+              <div class="empty-state-icon">🔧</div>
+              <h3>等待上一輪評審資料</h3>
+              <p>左側填入主題、優點、問題點與目標後，這裡會整理出下一輪最值得優先修正的方向，幫你避免「盲目重做」。</p>
+            </div>
+          </div>
+          <div class="result-wrap" id="middleResult">
+            <div class="block">
+              <h3>本輪優化總覽</h3>
+              <div class="info-box" id="summaryBox">這裡會顯示整體優化策略。</div>
+              <div class="score-summary">
+                <div class="mini-score"><strong>保留重點</strong><span id="keepFocusText">—</span></div>
+                <div class="mini-score"><strong>優先修正</strong><span id="improveFocusText">—</span></div>
+              </div>
+              <div class="tag-row" id="modeTags"></div>
+            </div>
+            <div class="block"><h3>優化優先順序</h3><div class="priority-list" id="priorityList"></div></div>
+            <div class="block"><h3>執行建議</h3><div class="list" id="actionList"></div></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="empty-state" id="emptyStateRight">
+            <div class="empty-state-inner">
+              <div class="empty-state-icon">🪄</div>
+              <h3>等待產生再生成 Prompt</h3>
+              <p>當左側資料整理完成後，這裡會直接生成可複製、可帶回下一輪的完整 prompt。</p>
+            </div>
+          </div>
+          <div class="result-wrap" id="rightResult">
+            <div class="block">
+              <h3>下一輪再生成 Prompt</h3>
+              <textarea id="promptArea" class="prompt-area"></textarea>
+              <div class="action-row">
+                <button type="button" class="btn btn-primary" id="copyPromptBtn">複製 Prompt</button>
+                <button type="button" class="btn btn-secondary" id="toGenerateBtn">帶去 generate.html</button>
+              </div>
+            </div>
+            <div class="block">
+              <h3>使用建議</h3>
+              <div class="list">
+                <div class="list-item">先將這份 prompt 帶到下一輪生成，觀察 AI 是否真正修正了上一輪問題。</div>
+                <div class="list-item">若新版本修正了主要問題，再回到 judge.html 重新評審，確認整體是否真的提升。</div>
+                <div class="list-item">每次優化不要同時改太多方向，先抓最影響完成度的 2～3 個關鍵點。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><strong>Flora Coach AI</strong><br />AI 花藝設計訓練平台</div>
+      <div>optimize.html｜作品優化再生成頁</div>
+    </div>
+  </footer>
+</body>
+</html>
