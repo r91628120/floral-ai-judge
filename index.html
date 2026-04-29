@@ -1,712 +1,814 @@
 <!DOCTYPE html>
-
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI花藝評審教練平台｜入口網站</title>
-<meta name="app-version" content="2026-04-09b">
-<meta content="讓學生在比賽前，已經被 AI 評審訓練過 100 次。上傳花藝作品，立即獲得競賽等級評分與專業講評。" name="description"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta name="keywords" content="AI花藝評審, 花藝評審教練, 花藝競賽, 花藝訓練, 花藝教學, AI評審, Floral AI Judge, 花藝作品評分">
-<meta name="author" content="凡事皆正面">
-<meta name="robots" content="index, follow">
-<meta name="app-version" content="2026-04-09b">
+  <title>AI花藝評審教練平台｜三評審交叉評分</title>
+  <meta name="app-version" content="2026-04-29-firebase-v5" />
+  <meta name="description" content="全台灣第一個 AI 花藝評審教練平台。支援花材辨識、三位評審交叉評分、六項統一評分、教師評分報告與圖形修正指導模式。" />
+  <meta name="keywords" content="AI花藝評審, 花藝評審教練, 花藝競賽, 花藝訓練, 三評審交叉評分, 教師評分報告, 圖形修正指導, Floral AI Judge" />
+  <meta name="author" content="凡事皆正面" />
+  <meta name="robots" content="index, follow" />
 
-<link rel="canonical" href="https://r91628120.github.io/floral-ai-judge/index.html">
+  <link rel="canonical" href="https://flora-coach-ai.web.app/" />
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="AI花藝評審教練平台｜入口網站">
-<meta property="og:description" content="上傳花藝作品，立即獲得競賽等級評分與專業講評，幫助學生用評審的眼睛重新看自己的作品。">
-<meta property="og:url" content="https://r91628120.github.io/floral-ai-judge/index.html">
-<meta property="og:site_name" content="AI花藝評審教練平台">
-<meta property="og:locale" content="zh_TW">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI花藝評審教練平台｜三評審交叉評分" />
+  <meta property="og:description" content="上傳花藝作品，獲得競賽級分析、三評審交叉評分、教師報告與圖形修正指導。" />
+  <meta property="og:url" content="https://flora-coach-ai.web.app/" />
+  <meta property="og:site_name" content="AI花藝評審教練平台" />
+  <meta property="og:locale" content="zh_TW" />
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI花藝評審教練平台｜入口網站">
-<meta name="twitter:description" content="上傳花藝作品，立即獲得競賽等級評分與專業講評。">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI花藝評審教練平台｜三評審交叉評分" />
+  <meta name="twitter:description" content="AI花藝評審教練" />
 
-<style>
-  :root{
-    --bg:#faf3f3;
-    --bg2:#f4e7e8;
-    --card:#fffdfb;
-    --ink:#342b2b;
-    --muted:#7b6a6d;
+  <style>
+    :root{
+      --bg:#fff7f7;
+      --bg2:#f8ecee;
+      --card:#fffdfb;
+      --ink:#31282a;
+      --muted:#78676b;
+      --soft:#f8e8ec;
+      --soft2:#fff3f5;
+      --line:#ead3d8;
+      --rose:#d9a3ad;
+      --rose-deep:#b87986;
+      --gold:#cba66b;
+      --gold-deep:#9c7440;
+      --green:#6d8068;
+      --green-soft:#eef6ec;
+      --blue:#63788f;
+      --shadow:0 22px 60px rgba(93, 51, 56, .11);
+      --shadow2:0 12px 30px rgba(93, 51, 56, .08);
+      --radius:26px;
+      --max:1160px;
+    }
 
-    --gold:#c9a56a;
-    --gold-deep:#9d7742;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(203,166,107,.18), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(217,163,173,.24), transparent 28%),
+        linear-gradient(180deg, #fffafa 0%, var(--bg) 48%, #f7eeee 100%);
+      line-height:1.75;
+    }
 
-    --rose:#d8a3ab;
-    --rose-deep:#b97c88;
-    --rose-soft:#f5e7ea;
+    a{text-decoration:none;color:inherit}
+    .container{max-width:var(--max);margin:0 auto;padding:0 24px}
+    .section{padding:78px 0}
+    .muted{color:var(--muted)}
+    .nowrap{white-space:nowrap}
 
-    --line:#edd7db;
-    --green:#6b7f68;
-    --green-soft:#eef4ec;
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(18px);
+      background:rgba(255,248,248,.82);
+      border-bottom:1px solid rgba(234,211,216,.86);
+    }
 
-    --shadow:0 18px 40px rgba(96,64,46,.10);
-    --radius:24px;
-    --hero-radius:34px;
-    --max:1160px;
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{display:flex;align-items:center;gap:13px;font-weight:900}
+    .brand-mark{
+      width:48px;height:48px;border-radius:18px;
+      background:linear-gradient(135deg,#f3dfe4,#d9b27f 58%,#b87986);
+      display:grid;place-items:center;color:#fff;font-size:24px;
+      box-shadow:var(--shadow2);
+    }
+    .brand-text{line-height:1.18}
+    .brand-text small{display:block;color:var(--muted);font-weight:750;font-size:.78rem}
+
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{color:var(--muted);font-weight:850;font-size:.95rem}
+    .nav-links a:hover{color:var(--ink)}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      border-radius:16px;
+      padding:14px 20px;
+      font-weight:950;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--gold),var(--rose-deep));
+      box-shadow:var(--shadow2);
+    }
+    .btn-secondary{background:#fff;border-color:var(--line);color:var(--ink)}
+    .btn-secondary:hover{background:var(--soft2)}
+    .btn-mini{padding:10px 14px;border-radius:14px;font-size:.93rem}
+
+    .hero{padding:34px 0 38px}
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:36px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,253,251,.98), rgba(249,238,240,.96));
+      box-shadow:var(--shadow);
+      padding:48px 42px;
+      display:grid;
+      grid-template-columns:1.07fr .93fr;
+      gap:32px;
+      align-items:center;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      width:320px;height:320px;border-radius:50%;
+      right:-120px;bottom:-120px;
+      background:radial-gradient(circle, rgba(217,163,173,.22), transparent 66%);
+      pointer-events:none;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding:8px 14px;
+      background:linear-gradient(180deg,#f8e8ec,#f4dde2);
+      border:1px solid #e9c6ce;
+      color:var(--rose-deep);
+      font-size:.92rem;
+      font-weight:950;
+    }
+
+    .hero-title{
+      margin:18px 0 12px;
+      font-size:clamp(2.28rem,4.6vw,4.75rem);
+      line-height:1.04;
+      letter-spacing:-.045em;
+      font-weight:1000;
+    }
+    .hero-sub{
+      margin:0 0 12px;
+      font-size:clamp(1.08rem,2vw,1.45rem);
+      color:var(--rose-deep);
+      font-weight:900;
+      line-height:1.45;
+    }
+    .lead{max-width:650px;color:var(--muted);font-size:1.05rem}
+    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+    .stat-row{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:22px;
+      max-width:540px;
+    }
+    .stat-card{
+      background:rgba(255,255,255,.74);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:14px 16px;
+      box-shadow:0 10px 24px rgba(93,51,56,.06);
+    }
+    .stat-label{color:var(--muted);font-size:.9rem;font-weight:850}
+    .stat-number{display:block;font-size:1.75rem;line-height:1.2;font-weight:1000;color:var(--rose-deep)}
+    .tiny-note{margin-top:12px;color:var(--muted);font-size:.95rem}
+
+    .hero-panel{
+      position:relative;
+      background:linear-gradient(180deg,#fffdfb,#f8eef0);
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:20px;
+      min-height:472px;
+      z-index:1;
+    }
+    .mock-report{
+      background:#fff;
+      border:1px solid #ead9dc;
+      border-radius:28px;
+      padding:18px;
+      box-shadow:0 18px 38px rgba(0,0,0,.07);
+    }
+    .screen-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .screen-title{font-weight:1000}
+    .pill{
+      display:inline-block;
+      background:#f8e7ec;
+      color:var(--rose-deep);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.8rem;
+      font-weight:950;
+    }
+    .judge-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
+    .judge-tab{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 8px;
+      background:#fff8f9;
+      text-align:center;
+      font-size:.82rem;
+      color:var(--muted);
+      font-weight:850;
+    }
+    .judge-tab b{display:block;color:var(--ink);font-size:1rem}
+
+    .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .score-item{
+      background:#fff8f9;
+      border:1px solid #efd7dc;
+      border-radius:17px;
+      padding:11px 10px;
+      text-align:center;
+      font-size:.88rem;
+    }
+    .score-item b{display:block;color:var(--rose-deep);font-size:1.1rem}
+    .mini-card{
+      margin-top:12px;
+      padding:13px 14px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fffafb;
+    }
+    .mini-card h4{margin:0 0 7px;font-size:.98rem}
+    .mini-card div,.mini-card p{color:var(--muted);font-size:.92rem;margin:0}
+
+    .section-title{
+      margin:0 0 12px;
+      font-size:clamp(1.75rem,3vw,2.45rem);
+      line-height:1.2;
+      letter-spacing:-.03em;
+    }
+    .section-sub{margin:0 0 26px;color:var(--muted);max-width:790px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{
+      background:rgba(255,253,251,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow2);
+      padding:24px;
+    }
+    .card h3{margin:0 0 8px;font-size:1.16rem}
+    .icon{
+      width:52px;height:52px;border-radius:18px;
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,#f8e7ec,#f3d9df);
+      color:var(--rose-deep);
+      font-size:24px;
+      margin-bottom:12px;
+    }
+
+    .process{
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+    .process-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:var(--shadow2);
+    }
+    .step-num{
+      width:38px;height:38px;border-radius:50%;
+      display:grid;place-items:center;
+      background:#f4dfe4;
+      color:var(--rose-deep);
+      font-weight:1000;
+      margin-bottom:10px;
+    }
+
+    .feature-band{
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:28px;
+      background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(250,238,241,.88));
+      box-shadow:var(--shadow2);
+    }
+
+    .sample-wrap{
+      display:grid;
+      grid-template-columns:1fr 1.55fr;
+      gap:18px;
+      align-items:start;
+    }
+    .score-box{
+      background:linear-gradient(180deg,#fff8f9,#f7e6ea);
+      border:1px solid #ecd4da;
+      border-radius:26px;
+      padding:22px;
+      text-align:center;
+    }
+    .score-box .big{font-size:3rem;font-weight:1000;color:var(--rose-deep);line-height:1}
+    .score-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .score-list div{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:11px 10px;
+      text-align:center;
+      font-size:.9rem;
+    }
+    .score-list b{display:block;color:var(--rose-deep);font-size:1.12rem}
+    .quote{
+      margin-top:16px;
+      padding:18px 18px 18px 20px;
+      border-left:4px solid var(--rose);
+      background:#fff7f8;
+      border-radius:16px;
+      color:#695057;
+    }
+
+    .teacher-report{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .report-line{
+      border:1px dashed #e2bdc5;
+      background:#fffafb;
+      border-radius:18px;
+      padding:14px 16px;
+      color:var(--muted);
+    }
+    .report-line b{color:var(--ink)}
+
+    .cta{
+      text-align:center;
+      border:1px solid var(--line);
+      border-radius:34px;
+      padding:42px 24px;
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at 70% 25%, rgba(217,163,173,.16), transparent 38%),
+        linear-gradient(135deg, rgba(255,253,251,.98), rgba(248,238,240,.96));
+    }
+
+    .footer{padding:32px 0 54px;color:var(--muted);font-size:.94rem}
+    .footer-line{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:16px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+
+    @media (max-width:980px){
+      .hero-card,.grid-3,.grid-2,.sample-wrap,.teacher-report{grid-template-columns:1fr}
+      .process{grid-template-columns:1fr 1fr}
+      .hero-card{padding:34px 24px}
+      .nav-inner{flex-wrap:wrap}
+      .nav-links{gap:14px;flex-wrap:wrap}
+    }
+
+    @media (max-width:640px){
+      .container,.nav-inner{padding-left:18px;padding-right:18px}
+      .brand-mark{width:42px;height:42px;border-radius:15px}
+      .brand-text small{font-size:.72rem}
+      .hero{padding-top:22px}
+      .hero-panel{min-height:auto}
+      .stat-row,.process{grid-template-columns:1fr}
+      .score-list,.score-grid{grid-template-columns:1fr 1fr}
+      .btn{width:100%}
+      .cta-row{flex-direction:column}
+      .section{padding:58px 0}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"AI花藝評審教練平台",
+    "url":"https://flora-coach-ai.web.app/",
+    "description":"支援花材辨識、三位評審交叉評分、教師評分報告與圖形修正指導的 AI 花藝教學工具。",
+    "inLanguage":"zh-Hant",
+    "publisher":{"@type":"Organization","name":"凡事皆正面"}
   }
-
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-    color:var(--ink);
-    background:
-      radial-gradient(circle at top right, rgba(216,163,171,.18), transparent 26%),
-      radial-gradient(circle at bottom left, rgba(201,165,106,.14), transparent 22%),
-      linear-gradient(180deg, #fdf7f7 0%, var(--bg) 46%, #f6eeee 100%);
-    line-height:1.75;
-  }
-
-  img{max-width:100%;display:block}
-  a{text-decoration:none;color:inherit}
-  .container{max-width:var(--max);margin:0 auto;padding:0 24px}
-  .section{padding:76px 0}
-
-  .badge{
-    display:inline-flex;align-items:center;gap:8px;
-    background:linear-gradient(180deg,#f8e9ec,#f4dde1);
-    border:1px solid #e9c8cf;
-    color:var(--rose-deep);
-    padding:9px 14px;border-radius:999px;font-weight:800;font-size:.92rem;letter-spacing:.02em
-  }
-
-  .nav{
-    position:sticky;top:0;z-index:20;
-    backdrop-filter: blur(16px);
-    background:rgba(253,247,247,.78);
-    border-bottom:1px solid rgba(237,215,219,.82);
-  }
-
-  .nav-inner{
-    max-width:var(--max);margin:0 auto;padding:14px 24px;
-    display:flex;align-items:center;justify-content:space-between;gap:20px
-  }
-
-  .brand{display:flex;align-items:center;gap:14px;font-weight:900}
-
-  .brand-mark{
-    width:48px;height:48px;border-radius:18px;
-    background:linear-gradient(135deg,#f4dfe3,#d9b27f 58%,#b98691);
-    display:grid;place-items:center;color:white;font-size:24px;
-    box-shadow:var(--shadow)
-  }
-
-  .brand-text{line-height:1.2}
-  .brand-text small{display:block;color:var(--muted);font-weight:700}
-
-  .nav-links{display:flex;gap:22px;align-items:center}
-  .nav-links a{color:var(--muted);font-weight:700}
-  .nav-links a:hover{color:var(--ink)}
-
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:10px;
-    border-radius:16px;padding:14px 20px;font-weight:900;transition:.2s ease;
-    border:1px solid transparent;cursor:pointer
-  }
-
-  .btn:hover{transform:translateY(-1px)}
-
-  .btn-primary{
-    background:linear-gradient(135deg,var(--gold),var(--rose-deep));
-    color:white;box-shadow:var(--shadow)
-  }
-
-  .btn-secondary{
-    background:white;
-    border-color:var(--line);
-    color:var(--ink)
-  }
-
-  .btn-secondary:hover{
-    background:var(--rose-soft);
-    border-color:#e3bcc5;
-  }
-
-  .hero{padding:36px 0 42px}
-
-  .hero-card{
-    position:relative;overflow:hidden;
-    background:linear-gradient(135deg, rgba(255,253,251,.98), rgba(248,239,240,.96));
-    border:1px solid var(--line);
-    border-radius:var(--hero-radius);
-    box-shadow:var(--shadow);
-    padding:52px 44px;
-    display:grid;grid-template-columns:1.12fr .88fr;gap:30px;align-items:center
-  }
-
-  .hero-card::before{
-    content:"";
-    position:absolute;inset:auto -90px -90px auto;width:260px;height:260px;border-radius:50%;
-    background:radial-gradient(circle, rgba(216,163,171,.22) 0%, rgba(216,163,171,0) 68%);
-    pointer-events:none;
-  }
-
-  h1{
-    margin:18px 0 14px;
-    font-size:clamp(2.25rem,4.6vw,4.2rem);
-    line-height:1.12;letter-spacing:-.03em
-  }
-
-  .hero-title{
-     margin:18px 0 10px;
-     font-size:clamp(2.2rem,4.8vw,4.4rem);
-     line-height:1.08;
-     letter-spacing:-.04em;
-     font-weight:900;
-  }
-
-  .hero-sub{
-     margin:0 0 10px;
-     font-size:clamp(1.08rem,2vw,1.45rem);
-     line-height:1.45;
-     color:var(--rose-deep);
-     font-weight:700;
-  }
-
-  .hero-tagline{
-     margin:0 0 18px;
-     font-size:1rem;
-     color:var(--muted);
-     font-weight:600;
-     letter-spacing:.01em;
-  }
-
-
-  .lead{max-width:640px;color:var(--muted);font-size:1.06rem}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-  .tiny-note{margin-top:12px;color:var(--muted);font-size:.95rem}
-
-  .hero-panel{
-    position:relative;
-    background:linear-gradient(180deg,#fffdfb,#f8eff0);
-    border:1px solid var(--line);
-    border-radius:28px;
-    padding:22px;
-    min-height:450px;
-    overflow:hidden;
-  }
-
-  .panel-glow{
-    position:absolute;inset:-40px auto auto -30px;width:180px;height:180px;border-radius:50%;
-    background:radial-gradient(circle, rgba(216,163,171,.16), transparent 65%);
-    pointer-events:none;
-  }
-
-  .mock-phone{
-    position:relative;
-    background:white;
-    border:1px solid #eadfce;
-    border-radius:28px;
-    padding:18px;
-    box-shadow:0 16px 36px rgba(0,0,0,.08)
-  }
-
-  .screen-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-  .screen-title{font-size:1.02rem;font-weight:900}
-
-  .pill{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:999px;
-    background:#f7e8eb;
-    color:var(--rose-deep);
-    font-size:.82rem;
-    font-weight:800
-  }
-
-  .score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
-
-  .score-item{
-    background:#fff8f8;
-    border:1px solid #efd8dc;
-    border-radius:18px;
-    padding:12px 10px;
-    text-align:center
-  }
-
-  .score-item b{display:block;font-size:1.18rem;color:var(--rose-deep)}
-
-  .mini-card{
-    margin-top:12px;
-    background:#fffafb;
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:14px
-  }
-
-  .mini-card h4{margin:0 0 8px;font-size:1rem}
-
-  .grid-3,.grid-2{display:grid;gap:18px}
-  .grid-3{grid-template-columns:repeat(3,1fr)}
-  .grid-2{grid-template-columns:repeat(2,1fr)}
-
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:24px
-  }
-
-  .card h3{margin:0 0 8px;font-size:1.14rem}
-
-  .section-title{
-    font-size:clamp(1.7rem,3vw,2.4rem);
-    line-height:1.2;margin:0 0 12px;letter-spacing:-.02em
-  }
-
-  .section-sub{margin:0 0 24px;color:var(--muted);max-width:760px}
-
-  .icon{
-    width:52px;height:52px;border-radius:18px;display:grid;place-items:center;
-    background:linear-gradient(180deg,#f8e7eb,#f2d8de);
-    color:var(--rose-deep);
-    font-size:24px;margin-bottom:12px
-  }
-
-  .step-num{
-    width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
-    background:#f4dfe3;
-    color:var(--rose-deep);
-    font-weight:900;margin-bottom:12px
-  }
-
-  .sample-score{
-    display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:start
-  }
-
-  .score-box{
-    background:linear-gradient(180deg,#fff9f9,#f7e8ea);
-    border:1px solid #ecd6da;
-    border-radius:24px;
-    padding:18px;
-    text-align:center
-  }
-
-  .score-box .big{font-size:2.3rem;font-weight:900;color:var(--rose-deep);line-height:1}
-
-  .score-list{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
-
-  .score-list div{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:10px;
-    text-align:center;
-    font-size:.92rem
-  }
-
-  .score-list b{display:block;color:var(--rose-deep);font-size:1.08rem}
-
-  .quote{
-    padding:18px 18px 18px 20px;
-    background:#fff7f8;
-    border-left:4px solid var(--rose);
-    border-radius:16px;
-    color:#6a5156
-  }
-
-  .audience{
-    display:grid;grid-template-columns:1fr 1fr;gap:18px
-  }
-
-  .audience ul{padding-left:1.2rem;margin:.2rem 0 0}
-
-  .cta{
-    text-align:center;
-    background:linear-gradient(135deg, rgba(255,253,251,.98), rgba(248,238,240,.96));
-    border:1px solid var(--line);
-    border-radius:32px;
-    padding:42px 24px;
-    box-shadow:var(--shadow)
-  }
-
-  .footer{padding:32px 0 54px;color:var(--muted);font-size:.95rem}
-
-  .footer-line{
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    border-top:1px solid var(--line);padding-top:18px
-  }
-
-  .notice{
-    background:#f9eff1;
-    color:#6d565b;
-    border:1px solid #ecd6da;
-    padding:16px 18px;
-    border-radius:16px
-  }
-
-  @media (max-width:960px){
-    .hero-card,.grid-3,.grid-2,.audience,.sample-score{grid-template-columns:1fr}
-    .nav-inner{flex-wrap:wrap}
-    .nav-links{flex-wrap:wrap;gap:14px}
-    .hero-card{padding:32px 22px}
-    .score-list{grid-template-columns:repeat(2,1fr)}
-  }
-
-  @media (max-width:640px){
-    .container,.nav-inner{padding-left:18px;padding-right:18px}
-    .brand-mark{width:42px;height:42px;border-radius:15px;font-size:22px}
-    .hero{padding-top:22px}
-    .hero-panel{min-height:auto}
-    .score-grid{grid-template-columns:1fr 1fr}
-    .score-list{grid-template-columns:1fr 1fr}
-    .btn{width:100%}
-    .cta-row{flex-direction:column}
-  }
-
-
-
-</style>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "AI花藝評審教練平台",
-  "url": "https://r91628120.github.io/floral-ai-judge/index.html",
-  "description": "上傳花藝作品，立即獲得競賽等級評分與專業講評，幫助學生用評審的眼睛重新看自己的作品。",
-  "inLanguage": "zh-Hant",
-  "publisher": {
-    "@type": "Organization",
-    "name": "凡事皆正面"
-  }
-}
-</script>
-
+  </script>
 </head>
+
 <body>
-<nav class="nav">
-<div class="nav-inner">
-<div class="brand">
-<div class="brand-mark">❀</div>
-<div class="brand-text">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="回到首頁">
+        <div class="brand-mark">❀</div>
+        <div class="brand-text">
           AI花藝評審教練
-          <small>Floral AI Judge | © 2026 凡事皆正面</small>
-</div>
-</div>
-<div class="nav-links">
-<a href="#value">核心價值</a>
-<a href="#features">功能介紹</a>
-<a href="#workflow">使用流程</a>
-<a href="#sample">評分示範</a>
-<a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" id="navStartBtn" rel="noopener noreferrer" style="padding:10px 14px" target="_blank">立即開始</a>
-</div>
-</div>
-</nav>
-<header class="hero">
-<div class="container">
-<div class="hero-card">
-<div>
-  <span class="badge">全台灣第一個 AI 花藝評審教練平台</span>
+          <small>Floral AI Judge｜ 三評審</small>
+        </div>
+      </a>
 
-  <h1 class="hero-title">AI 花藝評審教練平台</h1>
-
-  <p class="hero-sub">從作品上傳到講評回饋，打造更高效率的花藝訓練流程</p>
-
-  <p class="hero-tagline">專為花藝課堂訓練、競賽準備與作品講評設計</p>
-
-  <p class="lead">
-    上傳花藝作品，立即獲得「競賽等級」評分與專業講評。<br>
-    從色彩、結構、空間、焦點到創意，幫助學生用評審的眼睛重新看自己的作品。
-  </p>
-
-  <div class="cta-row">
-    <a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" id="heroStartBtn" rel="noopener noreferrer" target="_blank">立即體驗 AI 評審</a>
-    <a class="btn btn-secondary" href="upload-guide.html">上傳教學</a>
-    <a class="btn btn-secondary" href="#" onclick="alert('進階版功能開發中，敬請期待🔥')">進階評審（即將推出）</a>
-    <a class="btn btn-secondary" href="#sample">查看示範評審</a>
-  </div>
-
-  <div class="tiny-note">建議輸入「競賽題目」一起評審，結果會更接近正式比賽</div>
-  <div class="tiny-note">支援單張圖片分析｜六視角（前、後、左、右、上、細節）效果最佳</div>
-  <div class="tiny-note">🌸 已累計 <b id="counterValue">載入中…</b> 次評分</div>
-</div>
-<div class="hero-panel">
-<div class="panel-glow"></div>
-<div class="mock-phone">
-<div class="screen-top">
-<div class="screen-title">競賽評審結果</div>
-<span class="pill">六視角分析</span>
-</div>
-<div class="score-grid">
-<div class="score-item"><span>總分</span><b>84 / 100</b></div>
-<div class="score-item"><span>色彩</span><b>8 / 10</b></div>
-<div class="score-item"><span>結構</span><b>7 / 10</b></div>
-<div class="score-item"><span>空間</span><b>8 / 10</b></div>
-<div class="score-item"><span>焦點</span><b>9 / 10</b></div>
-<div class="score-item"><span>創意</span><b>8 / 10</b></div>
-</div>
-<div class="mini-card">
-<h4>評審講評</h4>
-<div style="color:var(--muted);font-size:.95rem">
-                整體色彩協調，主焦點位置清楚，視覺上已有主次關係。惟結構略偏右側，
-                左側支撐不足，使重心穩定度稍弱；若能再加強空間延伸，作品完整度會更高。
-              </div>
-</div>
-<div class="mini-card">
-<h4>改進建議</h4>
-<div style="color:var(--muted);font-size:.95rem">
-                1. 左側補入較輕線條支撐平衡<br/>
-                2. 減少焦點周邊干擾花材<br/>
-                3. 強化前後層次與留白節奏
-              </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</header>
-<section class="section" id="value">
-<div class="container">
-<h2 class="section-title">為什麼需要 AI 花藝評審？</h2>
-<p class="section-sub">
-        在傳統花藝學習中，學生完成作品後，往往需要等待老師指導；但老師時間有限，
-        無法即時回饋每一件作品。於是，學生常常做了作品，卻不知道真正的問題在哪裡。
-      </p>
-<div class="grid-3">
-<div class="card">
-<div class="icon">⏱</div>
-<h3>老師時間有限</h3>
-<p class="muted">現場教學忙碌，老師不一定能即時看到每一次練習作品。</p>
-</div>
-<div class="card">
-<div class="icon">👁</div>
-<h3>學生缺少評審視角</h3>
-<p class="muted">做完作品不等於看懂作品，真正的進步來自知道哪裡做對、哪裡失分。</p>
-</div>
-<div class="card">
-<div class="icon">🔁</div>
-<h3>練習次數不夠多</h3>
-<p class="muted">如果每一次練習都能得到講評，學生就有機會在比賽前反覆修正與成長。</p>
-</div>
-</div>
-<div class="notice" style="margin-top:18px">
-        我們打造這個系統的目的，不是取代老師，而是讓每一次練習，都像有評審在看。
-      </div>
-</div>
-</section>
-<section class="section" id="features" style="padding-top:28px">
-<div class="container">
-<h2 class="section-title">AI 如何幫你進步？</h2>
-<p class="section-sub">不是簡單評分，而是模擬真實競賽評審的觀察順序與講評方式，提供更具體、更能重做的回饋。</p>
-<div class="grid-3">
-<div class="card">
-<div class="icon">🧾</div>
-<h3>競賽級評分</h3>
-<p class="muted">從色彩、結構、空間、焦點、創意五大面向進行分析，模擬競賽評分邏輯。</p>
-</div>
-<div class="card">
-<div class="icon">🎓</div>
-<h3>評審語氣講評</h3>
-<p class="muted">不是泛泛稱讚，而是像評審老師在現場講評作品，直接指出優點與核心問題。</p>
-</div>
-<div class="card">
-<div class="icon">🛠</div>
-<h3>可操作的改進建議</h3>
-<p class="muted">不只告訴你「哪裡不好」，而是告訴你「下一次該怎麼改」。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="section" id="workflow">
-<div class="container">
-<h2 class="section-title">三步驟，完成一次完整訓練</h2>
-<p class="section-sub">從上傳作品到獲得講評，每一次使用，都是一次花藝競賽思維訓練。</p>
-<div class="grid-3">
-<div class="card">
-<div class="step-num">1</div>
-<h3>上傳作品</h3>
-<p class="muted">支援單張照片，也支援六視角（前、後、左、右、上、細節）。視角越完整，分析越準確。</p>
-</div>
-<div class="card">
-<div class="step-num">2</div>
-<h3>AI 評審分析</h3>
-<p class="muted">模擬評審流程，先看整體印象，再看結構、色彩、空間、焦點與創意表現。</p>
-</div>
-<div class="card">
-<div class="step-num">3</div>
-<h3>獲得講評與修正</h3>
-<p class="muted">立即知道哪裡做得好、哪裡失分、下一步怎麼改，讓每一件作品都能再進步一次。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="section" id="sample" style="padding-top:26px">
-<div class="container">
-<h2 class="section-title">AI 評審示範</h2>
-<p class="section-sub">這裡展示一份典型輸出格式，幫助使用者快速理解系統會提供什麼樣的回饋。</p>
-<div class="card">
-<div class="sample-score">
-<div class="score-box">
-<div style="font-weight:800;color:var(--muted);margin-bottom:8px">總分</div>
-<div class="big">82</div>
-<div style="margin-top:6px;color:var(--muted)">/ 100</div>
-</div>
-<div>
-<div class="score-list">
-<div><span>色彩</span><b>8</b></div>
-<div><span>結構</span><b>7</b></div>
-<div><span>空間</span><b>8</b></div>
-<div><span>焦點</span><b>9</b></div>
-<div><span>創意</span><b>8</b></div>
-</div>
-<div class="quote" style="margin-top:18px">
-              整體色彩協調，焦點位置清楚，作品已有主次關係與基本節奏。惟結構略偏右側，
-              左側支撐不夠，使重心穩定度稍弱；若能再拉出前後空間，層次會更完整，
-              作品的競賽感也會更明顯。
-            </div>
-<div class="grid-2" style="margin-top:18px">
-<div class="mini-card" style="margin-top:0">
-<h4>三個主要優點</h4>
-<div style="color:var(--muted)">
-                  1. 焦點明確，視線能快速集中<br/>
-                  2. 色彩搭配協調，有基本層次<br/>
-                  3. 作品整體完成度不錯
-                </div>
-</div>
-<div class="mini-card" style="margin-top:0">
-<h4>三個主要問題</h4>
-<div style="color:var(--muted)">
-                  1. 結構重心偏右<br/>
-                  2. 左側支撐不足<br/>
-                  3. 空間延伸略顯保守
-                </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="container">
-<h2 class="section-title">誰適合使用？</h2>
-<p class="section-sub">不論你是正在備賽的學生，或是忙碌的花藝老師，這套工具都能成為教學與訓練的延伸。</p>
-<div class="audience">
-<div class="card">
-<div class="icon">🎓</div>
-<h3>學生</h3>
-<ul class="muted">
-<li>練習作品自我檢查</li>
-<li>比賽前大量模擬訓練</li>
-<li>學會用評審眼光看作品</li>
-<li>建立作品修正能力與判斷力</li>
-</ul>
-</div>
-<div class="card">
-<div class="icon">👨‍🏫</div>
-<h3>老師</h3>
-<ul class="muted">
-<li>減少重複性基礎講評負擔</li>
-<li>輔助課堂與課後訓練</li>
-<li>讓學生先經過 AI 初步講評</li>
-<li>把寶貴時間放在關鍵指導上</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section class="section" id="start" style="padding-top:24px">
-<div class="container">
-<div class="cta">
-<span class="badge">現在就開始</span>
-<h2 class="section-title" style="margin-top:16px">現在就開始你的花藝評審訓練</h2>
-<p class="section-sub" style="margin:0 auto 24px">
-          每一次上傳，都是一次進步的機會。<br/>
-          不是讓 AI 幫你評分，而是讓你學會用評審的眼睛看作品。
-        </p>
-<div class="cta-row" style="justify-content:center">
-<a class="btn btn-primary" href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian" id="bottomStartBtn" rel="noopener noreferrer" target="_blank">立即使用 AI 評審</a>
-<a class="btn btn-secondary" href="#sample">先看評分示範</a>
-</div>
-</div>
-</div>
-</section>
-<footer class="footer">
-  <div class="container">
-    <div class="footer-line">
-      <div>
-       AI花藝評審教練平台｜Floral AI Judge | © 2026 凡事皆正面 | 版本 v2026-04-09b <br>
-        <a href="privacy.html" style="color:#b97c88; font-weight:800;">
-          🔒 隱私權與資料說明
+      <div class="nav-links">
+        <a href="#value">核心價值</a>
+        <a href="#features">功能</a>
+        <a href="#workflow">流程</a>
+        <a href="#sample">示範</a>
+        <a href="#teacher">教師模式</a>
+        <a class="btn btn-primary"
+           href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="addCounterOnce()">
+            立即開始
         </a>
       </div>
+    </div>
+  </nav>
 
-      <div>
-        建議搭配六視角照片使用，以獲得更完整準確的分析結果。
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero-card">
+        <div>
+          <span class="badge">全台灣第一個 AI 花藝評審教練平台</span>
+          <h1 class="hero-title">AI 花藝評審教練</h1>
+          <p class="hero-sub">三位評審交叉評分・六項統一評分・教師報告・圖形修正指導</p>
+
+          <p class="lead">
+            上傳花藝作品照片，AI 會先判斷題目、視角與畫面限制，再進行花材辨識、配置分析與三評審交叉評分。
+            這不是只給分數，而是幫學生看見作品真正可以進步的位置。
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary"
+              href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian"
+              target="_blank"
+                rel="noopener noreferrer"
+               onclick="addGasCounterOnce()">
+                立即使用 AI 評審
+            </a>
+            <a class="btn btn-secondary" href="upload-guide.html">查看上傳教學</a>
+            <a class="btn btn-secondary" href="#sample">先看評分示範</a>
+          </div>
+
+          <div class="stat-row" aria-label="平台使用統計">
+            <div class="stat-card">
+              <span class="stat-label">🌸 已累計評分</span>
+              <span class="stat-number"><b id="counterValue">載入中…</b></span>
+              <span class="stat-label">次 AI 評審</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">📅 今日使用</span>
+              <span class="stat-number"><b id="todayCounterValue">載入中…</b></span>
+              <span class="stat-label">次評審訓練</span>
+            </div>
+          </div>
+
+          <div class="tiny-note">建議輸入「競賽題目」一起評審；支援單張圖片，六視角（前、後、左、右、上、細節）效果最佳。</div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="mock-report">
+            <div class="screen-top">
+              <div class="screen-title">三評審交叉評分結果</div>
+              <span class="pill">v3.3 + v5</span>
+            </div>
+
+            <div class="judge-tabs">
+              <div class="judge-tab">評審 A<b>嚴格結構型</b></div>
+              <div class="judge-tab">評審 B<b>整體平衡型</b></div>
+              <div class="judge-tab">評審 C<b>創意導向型</b></div>
+            </div>
+
+            <div class="score-grid">
+              <div class="score-item"><span>主題符合度</span><b>8 / 10</b></div>
+              <div class="score-item"><span>整體組合</span><b>7 / 10</b></div>
+              <div class="score-item"><span>色彩表現</span><b>8 / 10</b></div>
+              <div class="score-item"><span>花材角色</span><b>7 / 10</b></div>
+              <div class="score-item"><span>空間動線</span><b>8 / 10</b></div>
+              <div class="score-item"><span>創意表現</span><b>8 / 10</b></div>
+            </div>
+
+            <div class="mini-card">
+              <h4>最終建議分數：78 / 100</h4>
+              <p>結構已有建立，焦點也能辨識，但左側支撐與前後層次仍不足，使整體穩定度與競賽完整度受到影響。</p>
+            </div>
+
+            <div class="mini-card">
+              <h4>關鍵修正</h4>
+              <p>先調整重心，再減少焦點周邊干擾花材，最後補出前後空間層次。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </header>
 
-<script>
+  <main>
+    <section class="section" id="value">
+      <div class="container">
+        <h2 class="section-title">為什麼需要 AI 花藝評審？</h2>
+        <p class="section-sub">
+          花藝作品完成後，學生最需要的不是一句「很好看」，而是知道：哪裡有競賽優勢、哪裡正在失分、下一次該怎麼修正。
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="icon">⏱</div>
+            <h3>老師時間有限</h3>
+            <p class="muted">現場教學忙碌，老師不一定能即時看到每一次練習作品。AI 可以先做初步講評，讓老師把時間留給關鍵指導。</p>
+          </div>
+          <div class="card">
+            <div class="icon">👁</div>
+            <h3>學生缺少評審視角</h3>
+            <p class="muted">做完作品不等於看懂作品。透過評審語氣與扣分原因，學生能學會用競賽角度檢查作品。</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔁</div>
+            <h3>練習需要反覆回饋</h3>
+            <p class="muted">同一組材料可以多次調整、重拍、再評審，讓學生在比賽前累積更多修正經驗。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" style="padding-top:28px">
+      <div class="container">
+        <h2 class="section-title">新版核心功能</h2>
+        <p class="section-sub">依據 v3.3 分析與 v5 三評審架構，首頁功能說明同步升級。</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="icon">🌿</div>
+            <h3>花材辨識與配置分析</h3>
+            <p class="muted">先辨識主花、配花、線條花材與葉材，再判斷它們是否真正支撐焦點、結構與空間。</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚖️</div>
+            <h3>三位評審交叉評分</h3>
+            <p class="muted">評審 A 偏嚴格結構、評審 B 重視整體平衡、評審 C 看創意表現，最後形成更接近真人評審的統整結果。</p>
+          </div>
+          <div class="card">
+            <div class="icon">🧩</div>
+            <h3>六項統一評分</h3>
+            <p class="muted">從主題符合度、整體組合、色彩、花材角色、空間比例動線、創意表現六項檢視作品。</p>
+          </div>
+          <div class="card">
+            <div class="icon">📄</div>
+            <h3>教師評分報告模式</h3>
+            <p class="muted">輸入「請輸出評分報告」，可轉為正式教學評量格式，適合課堂回饋、作業評量與學習歷程整理。</p>
+          </div>
+          <div class="card">
+            <div class="icon">🖍</div>
+            <h3>圖形修正指導模式</h3>
+            <p class="muted">輸入「請輸出圖形修正指導模式」，可取得問題標註、修正後畫面描述與圖像生成提示詞。</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔒</div>
+            <h3>隱私與教學使用提醒</h3>
+            <p class="muted">系統僅針對當次圖片分析，不主動儲存作品照片；評審結果作為教學輔助，不取代正式評審裁量。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="container">
+        <h2 class="section-title">五步驟，完成一次完整評審</h2>
+        <p class="section-sub">新版流程不是直接評分，而是先建立判斷基礎，再由三位評審交叉評分。</p>
+
+        <div class="process">
+          <div class="process-card">
+            <div class="step-num">1</div>
+            <h3>輸入判斷</h3>
+            <p class="muted">確認是否有題目、是否為六視角、圖片是否清晰，先說明判讀限制。</p>
+          </div>
+          <div class="process-card">
+            <div class="step-num">2</div>
+            <h3>花材辨識</h3>
+            <p class="muted">辨識主花、配花、線條花材、葉材；不確定時以形態描述避免誤判。</p>
+          </div>
+          <div class="process-card">
+            <div class="step-num">3</div>
+            <h3>整體印象</h3>
+            <p class="muted">判斷構型、焦點、重心、完整度，以及是否回應競賽題目。</p>
+          </div>
+          <div class="process-card">
+            <div class="step-num">4</div>
+            <h3>三評審評分</h3>
+            <p class="muted">由 A、B、C 三種評審觀點交叉檢查，避免單一視角過度偏差。</p>
+          </div>
+          <div class="process-card">
+            <div class="step-num">5</div>
+            <h3>最終統整</h3>
+            <p class="muted">整理共識優點、共識問題、最關鍵問題與可操作修正建議。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sample" style="padding-top:30px">
+      <div class="container">
+        <h2 class="section-title">新版評分示範</h2>
+        <p class="section-sub">以下是首頁示範格式，實際評審會依使用者照片與題目重新分析。</p>
+
+        <div class="card">
+          <div class="sample-wrap">
+            <div class="score-box">
+              <div style="font-weight:900;color:var(--muted);margin-bottom:8px">最終建議分數</div>
+              <div class="big">78</div>
+              <div style="margin-top:6px;color:var(--muted)">/ 100</div>
+              <div class="quote" style="text-align:left;margin-top:18px">
+                以三位評審平均分數為基礎，依整體共識微調後形成唯一正式結論分數。
+              </div>
+            </div>
+
+            <div>
+              <div class="score-list">
+                <div><span>主題符合度</span><b>8</b></div>
+                <div><span>整體組合</span><b>7</b></div>
+                <div><span>色彩表現</span><b>8</b></div>
+                <div><span>花材角色</span><b>7</b></div>
+                <div><span>空間動線</span><b>8</b></div>
+                <div><span>創意表現</span><b>8</b></div>
+              </div>
+
+              <div class="quote">
+                作品具備基本完整度，焦點位置能被辨識，色彩關係也尚稱協調；但結構重心略偏右，左側支撐不足，使整體穩定性與競賽完整度受到影響。
+              </div>
+
+              <div class="grid-2" style="margin-top:16px">
+                <div class="mini-card" style="margin-top:0">
+                  <h4>評審共識優點</h4>
+                  <div>1. 焦點位置清楚<br>2. 色彩關係協調<br>3. 作品有基本完整度</div>
+                </div>
+                <div class="mini-card" style="margin-top:0">
+                  <h4>評審共識問題</h4>
+                  <div>1. 重心偏右<br>2. 左側支撐不足<br>3. 前後空間層次保守</div>
+                </div>
+              </div>
+
+              <div class="mini-card">
+                <h4>最關鍵問題</h4>
+                <div>結構重心與支撐不足。建議先修正作品左右平衡，再處理焦點周邊花材密度。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="teacher" style="padding-top:30px">
+      <div class="container">
+        <div class="feature-band">
+          <h2 class="section-title">教師可直接使用的兩種進階模式</h2>
+          <p class="section-sub">新版 GPT 不只是學生練習工具，也能成為老師課堂評量與講評的延伸。</p>
+
+          <div class="teacher-report">
+            <div class="card">
+              <div class="icon">📄</div>
+              <h3>教師評分報告模式</h3>
+              <p class="muted">輸入「請輸出評分報告」，系統會轉為正式教學評量報告，包含基本資訊、作品整體評估、花材配置、分項評分、三評審統整、主要優點、主要問題與教師評語。</p>
+            </div>
+            <div class="card">
+              <div class="icon">🧭</div>
+              <h3>圖形修正指導模式</h3>
+              <p class="muted">輸入「請輸出圖形修正指導模式」，系統會整理原作品問題標註、圖像修正建議、修正後畫面描述、操作順序與圖像生成提示詞。</p>
+            </div>
+          </div>
+
+          <div class="teacher-report" style="margin-top:16px">
+            <div class="report-line"><b>適合老師：</b>作業講評、課後練習、競賽培訓、學生學習歷程整理。</div>
+            <div class="report-line"><b>適合學生：</b>自我檢查、比賽前大量練習、作品修正、建立評審視角。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">使用前請先知道</h2>
+        <p class="section-sub">讓 AI 成為訓練助手，而不是取代老師與正式評審。</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="icon">📸</div>
+            <h3>照片角度會影響結果</h3>
+            <p class="muted">單張照片能看造型，但立體結構、背面與深度判斷有限。若要更完整，建議上傳六視角。</p>
+          </div>
+          <div class="card">
+            <div class="icon">🏷</div>
+            <h3>題目越清楚，評分越準</h3>
+            <p class="muted">若有競賽題目、尺寸限制、用途或指定花材，請一併提供，AI 才能判斷主題符合度。</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚠️</div>
+            <h3>照片無法判斷現場操作</h3>
+            <p class="muted">工作崗位、時間掌握、現場安全、手部技巧與保鮮維護，仍需透過教師現場觀察。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="start" style="padding-top:24px">
+      <div class="container">
+        <div class="cta">
+          <span class="badge">現在就開始</span>
+          <h2 class="section-title" style="margin-top:16px">開始你的花藝評審訓練</h2>
+          <p class="section-sub" style="margin:0 auto 24px">
+            每一次上傳，都是一次進步的機會。不是讓 AI 幫你決定分數，而是讓你學會用評審的眼睛看作品。
+          </p>
+          <div class="cta-row" style="justify-content:center">
+            <a class="btn btn-primary"
+               href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian"
+               target="_blank"
+               rel="noopener noreferrer"
+               onclick="addGasCounterOnce()">
+              立即使用 AI 評審
+             </a>
+            <a class="btn btn-secondary" href="upload-guide.html">查看上傳教學</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-line">
+        <div>
+          AI花藝評審教練平台｜Floral AI Judge｜© 2026 凡事皆正面｜版本 v2026-04-29-firebase-v5<br>
+          <a href="privacy.html" style="color:#b97c88;font-weight:900;">🔒 隱私權與資料說明</a>
+        </div>
+        <div>建議搭配六視角照片與競賽題目使用，以獲得更完整準確的分析結果。</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
 const GAS_URL = "https://script.google.com/macros/s/AKfycbzLRUozBhn6R2HHpUDskVDH87-dLrxUV64rrv4qr_3LvVwlKV7J1LhAP83sFL_B684S6g/exec";
-const SITE = 'floral-ai-judge';
-const VERSION = '2026-04-09a';
+const VERSION = "2026-04-29-github-gas";
+
+let hasClickedAIJudge = false;
+
+function formatNumber(value) {
+  return Number(value || 0).toLocaleString("zh-TW");
+}
 
 async function loadCounter() {
+  const totalEl = document.getElementById("counterValue");
+  const todayEl = document.getElementById("todayCounterValue");
+
   try {
-    const res = await fetch(`${GAS_URL}?action=get&site=${encodeURIComponent(SITE)}&t=${Date.now()}`, {
-      method: 'GET',
-      cache: 'no-store'
+    const res = await fetch(`${GAS_URL}?mode=get&t=${Date.now()}`, {
+      method: "GET",
+      cache: "no-store"
     });
+
     const data = await res.json();
 
-    const el = document.getElementById('counterValue');
-    if (!el) return;
-
     if (data.ok) {
-      el.textContent = data.count;
+      if (totalEl) totalEl.textContent = formatNumber(data.totalCount || data.count);
+      if (todayEl) todayEl.textContent = formatNumber(data.todayCount || data.dailyCount || 0);
     } else {
-      el.textContent = '讀取失敗';
-      console.error('讀取計數失敗:', data);
+      if (totalEl) totalEl.textContent = "讀取失敗";
+      if (todayEl) todayEl.textContent = "讀取失敗";
     }
   } catch (err) {
-    const el = document.getElementById('counterValue');
-    if (el) el.textContent = '讀取失敗';
-    console.error('讀取 GAS 失敗:', err);
+    if (totalEl) totalEl.textContent = "讀取失敗";
+    if (todayEl) todayEl.textContent = "讀取失敗";
+    console.error("讀取 GAS 計數失敗:", err);
   }
 }
 
-function incrementCounterOnce() {
+async function addGasCounterOnce() {
+  if (hasClickedAIJudge) return;
+  hasClickedAIJudge = true;
+
   try {
-    const url = `${GAS_URL}?action=increment&site=${encodeURIComponent(SITE)}&t=${Date.now()}`;
+    await fetch(`${GAS_URL}?mode=add&type=floral_judge&t=${Date.now()}`, {
+      method: "GET",
+      cache: "no-store"
+    });
 
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url);
-    } else {
-      fetch(url, {
-        method: 'GET',
-        cache: 'no-store',
-        keepalive: true
-      }).catch((err) => {
-        console.error('累加失敗:', err);
-      });
-    }
+    loadCounter();
   } catch (err) {
-    console.error('累加 GAS 失敗:', err);
+    console.error("GAS 累加失敗:", err);
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  loadCounter();
-
-  ['navStartBtn', 'heroStartBtn', 'bottomStartBtn'].forEach((id) => {
-    const btn = document.getElementById(id);
-    if (!btn) return;
-
-    btn.addEventListener('click', () => {
-      incrementCounterOnce();
-    });
-  });
-});
-console.log('Floral AI Judge version:', VERSION);
+window.addEventListener("DOMContentLoaded", loadCounter);
+console.log("Floral AI Judge version:", VERSION);
 </script>
 </body>
 </html>
