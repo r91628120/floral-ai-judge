@@ -429,7 +429,7 @@
            href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian"
            target="_blank"
            rel="noopener noreferrer"
-           onclick="addCounterOnce()">
+           onclick="addGasCounterOnce()">
             立即開始
         </a>
       </div>
@@ -755,11 +755,10 @@
     </div>
   </footer>
 
-  <script>
+ <script>
 const GAS_URL = "https://script.google.com/macros/s/AKfycbzLRUozBhn6R2HHpUDskVDH87-dLrxUV64rrv4qr_3LvVwlKV7J1LhAP83sFL_B684S6g/exec";
-const VERSION = "2026-04-29-github-gas";
-
-let hasClickedAIJudge = false;
+const SITE = "floral-ai-judge";
+const VERSION = "2026-04-29-github-gas-v2";
 
 function formatNumber(value) {
   return Number(value || 0).toLocaleString("zh-TW");
@@ -770,7 +769,7 @@ async function loadCounter() {
   const todayEl = document.getElementById("todayCounterValue");
 
   try {
-    const res = await fetch(`${GAS_URL}?mode=get&t=${Date.now()}`, {
+    const res = await fetch(`${GAS_URL}?action=get&site=${encodeURIComponent(SITE)}&t=${Date.now()}`, {
       method: "GET",
       cache: "no-store"
     });
@@ -778,32 +777,36 @@ async function loadCounter() {
     const data = await res.json();
 
     if (data.ok) {
-      if (totalEl) totalEl.textContent = formatNumber(data.totalCount || data.count);
+      if (totalEl) totalEl.textContent = formatNumber(data.totalCount || data.count || 0);
       if (todayEl) todayEl.textContent = formatNumber(data.todayCount || data.dailyCount || 0);
     } else {
       if (totalEl) totalEl.textContent = "讀取失敗";
       if (todayEl) todayEl.textContent = "讀取失敗";
+      console.error("讀取 GAS 計數失敗:", data);
     }
   } catch (err) {
     if (totalEl) totalEl.textContent = "讀取失敗";
     if (todayEl) todayEl.textContent = "讀取失敗";
-    console.error("讀取 GAS 計數失敗:", err);
+    console.error("讀取 GAS 失敗:", err);
   }
 }
 
-async function addGasCounterOnce() {
+let hasClickedAIJudge = false;
+
+function addGasCounterOnce() {
   if (hasClickedAIJudge) return;
   hasClickedAIJudge = true;
 
-  try {
-    await fetch(`${GAS_URL}?mode=add&type=floral_judge&t=${Date.now()}`, {
-      method: "GET",
-      cache: "no-store"
-    });
+  const url = `${GAS_URL}?action=increment&site=${encodeURIComponent(SITE)}&t=${Date.now()}`;
 
-    loadCounter();
-  } catch (err) {
-    console.error("GAS 累加失敗:", err);
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon(url);
+  } else {
+    fetch(url, {
+      method: "GET",
+      cache: "no-store",
+      keepalive: true
+    }).catch(err => console.error("累加 GAS 失敗:", err));
   }
 }
 
