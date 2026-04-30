@@ -116,6 +116,11 @@
     }
     .btn-secondary{background:#fff;border-color:var(--line);color:var(--ink)}
     .btn-secondary:hover{background:var(--soft2)}
+    .btn-green{
+      color:#fff;
+      background:linear-gradient(135deg,#7f9f73,#4f7b59);
+      box-shadow:var(--shadow2);
+    }
     .btn-mini{padding:10px 14px;border-radius:14px;font-size:.93rem}
 
     .hero{padding:34px 0 38px}
@@ -459,15 +464,30 @@
             </a>
             <a class="btn btn-secondary" href="upload-guide.html">查看上傳教學</a>
             <a class="btn btn-secondary" href="#sample">先看評分示範</a>
+            <a class="btn btn-green"
+                     href="你的Firebase收費網頁網址"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                     AI綠美化空間設計師
+            </a>
           </div>
 
           <div class="stat-row" aria-label="平台使用統計">
-            <div class="stat-card">
-              <span class="stat-label">🌸 已累計評分</span>
-              <span class="stat-number"><b id="counterValue">載入中…</b></span>
-              <span class="stat-label">次 AI 評審</span>
+          <div class="stat-card" style="display:flex;align-items:center;gap:14px;max-width:360px;">
+            <div style="width:48px;height:48px;border-radius:16px;background:#f8e7ec;display:grid;place-items:center;font-size:24px;">
+              🌸
             </div>
-           </div>
+              <div>
+               <div class="stat-label">已累計完成</div>
+                <div style="display:flex;align-items:baseline;gap:8px;">
+                 <span class="stat-number" style="font-size:2.15rem;">
+                   <b id="counterValue">載入中…</b>
+                 </span>
+                <span class="stat-label">次 AI 評審</span>
+               </div>
+              </div>
+             </div>
+            </div>
 
           <div class="tiny-note">建議輸入「競賽題目」一起評審；支援單張圖片，六視角（前、後、左、右、上、細節）效果最佳。</div>
         </div>
@@ -779,7 +799,6 @@ async function loadCounter() {
     }
   } catch (err) {
     if (totalEl) totalEl.textContent = "讀取失敗";
-    if (todayEl) todayEl.textContent = "讀取失敗";
     console.error("讀取 GAS 失敗:", err);
   }
 }
