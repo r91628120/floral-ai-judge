@@ -370,26 +370,42 @@
 
 <body>
 
-<header>
-
-  <a href="index.html" style="
-  display:inline-flex;
+<header style="
+  display:flex;
   align-items:center;
-  gap:6px;
-  text-decoration:none;
-  font-size:14px;
-  padding:8px 14px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#f8f3eb,#eaddcc);
-  color:#8f6b42;
-  border:1px solid #e5d6c4;
+  justify-content:space-between;
+  padding:16px 20px;
+">
+
+  <!-- 左邊：返回 -->
+  <a href="index.html" style="
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    text-decoration:none;
+    font-size:14px;
+    padding:8px 14px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#f8f3eb,#eaddcc);
+    color:#8f6b42;
+    border:1px solid #e5d6c4;
   ">
-   ← 返回
- </a>
+    ← 返回
+  </a>
 
-  <h1>AI空間美感設計師</h1>
+  <!-- 中間：標題 -->
+  <h1 style="
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+  ">
+    AI綠美化空間美感設計師
+  </h1>
+
+  <!-- 右邊留空（讓標題置中） -->
+  <div style="width:80px;"></div>
+
 </header>
-
 <section class="hero">
   <h2>拍一張角落，AI幫你變高級空間 ✨</h2>
   <p>
