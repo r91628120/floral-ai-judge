@@ -1,0 +1,860 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI空間美感設計師｜植物與花藝角落佈置</title>
+
+  <style>
+    :root {
+      --main: #8f6b42;
+      --soft: #f8f3eb;
+      --light: #fffaf3;
+      --text: #2f2a25;
+      --muted: #766b60;
+      --card: #ffffff;
+      --danger: #b85c5c;
+      --green: #6f8f5f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: linear-gradient(180deg, #fffaf3, #f4eadf);
+      color: var(--text);
+    }
+
+    header {
+      padding: 18px 20px;
+      background: rgba(255, 250, 243, 0.9);
+      border-bottom: 1px solid #eaddcc;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--main);
+    }
+
+    .hero {
+      padding: 42px 20px 30px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      margin: 0 0 14px;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 0 auto;
+      max-width: 680px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(80, 55, 30, 0.08);
+      margin-bottom: 22px;
+    }
+
+    .upload-box {
+      
+      border: 2px dashed #d8c3aa;
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      background: var(--light);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .upload-label,
+    button {
+      display: inline-block;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      background: var(--main);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    button:disabled {
+      background: #b8a99a;
+      cursor: not-allowed;
+    }
+
+    .preview {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .preview img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      border-radius: 16px;
+      border: 1px solid #ddcbb8;
+      padding: 14px;
+      font-size: 15px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .usage {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .result {
+      display: none;
+    }
+
+    .result h3 {
+      color: var(--main);
+      font-size: 22px;
+      margin-top: 0;
+    }
+
+    .result-content {
+      background: #fffdf9;
+      border-left: 5px solid var(--green);
+      border-radius: 16px;
+      padding: 20px;
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+
+    .paywall {
+      display: none;
+      background: #fff6f6;
+      border: 1px solid #e6b7b7;
+      border-radius: 20px;
+      padding: 22px;
+      color: var(--danger);
+      margin-top: 18px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .plan {
+      border: 1px solid #e5d6c4;
+      border-radius: 18px;
+      padding: 18px;
+      background: #fffdf9;
+    }
+
+    .plan h4 {
+      margin: 0 0 8px;
+      color: var(--main);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .notice {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    
+     .premium-btn {
+      width: 100%;
+      margin-top: 18px;
+      background: #6f8f5f;
+    }
+
+
+    /* ===== 手機版 UI 優化：space-designer ===== */
+@media (max-width: 768px) {
+  header {
+    padding: 14px 16px;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  .hero {
+    padding: 30px 18px 18px;
+  }
+
+  .hero h2 {
+    font-size: 26px;
+    line-height: 1.35;
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .container {
+    padding: 14px;
+  }
+
+  .card {
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .upload-box {
+    
+    padding: 22px 16px;
+  }
+
+  .upload-label,
+  button {
+    width: 100%;
+    text-align: center;
+    padding: 15px 18px;
+    font-size: 16px;
+  }
+
+  textarea {
+    min-height: 120px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .preview img {
+    max-height: 300px;
+    border-radius: 16px;
+  }
+
+  .plans {
+    grid-template-columns: 1fr;
+  }
+
+  .plan {
+    padding: 16px;
+  }
+
+  .result-content {
+    padding: 18px;
+    font-size: 15px;
+    line-height: 1.9;
+    border-radius: 18px;
+  }
+
+  .notice {
+    font-size: 13px;
+  }
+
+  footer {
+    padding: 24px 16px 90px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero h2 {
+    font-size: 23px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}
+
+/* ===== 商業版升級：評分、植物卡、風格重試 ===== */
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.score-card {
+  background: #fffaf3;
+  border: 1px solid #e5d6c4;
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.score-card strong {
+  color: var(--main);
+}
+
+.plant-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.plant-card {
+  background: #fffdf9;
+  border: 1px solid #e5d6c4;
+  border-radius: 18px;
+  padding: 16px;
+  line-height: 1.7;
+}
+
+.plant-card h4 {
+  margin: 0 0 8px;
+  color: var(--green);
+}
+
+.style-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.style-actions button {
+  flex: 1;
+  background: var(--green);
+}
+
+.business-note {
+  background: #f8f3eb;
+  border-radius: 16px;
+  padding: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>AI空間美感設計師</h1>
+</header>
+
+<section class="hero">
+  <h2>拍一張角落，AI幫你變高級空間 ✨</h2>
+  <p>
+  上傳店內、居家、櫃台或空白角落照片，AI為你打造專屬植物與花藝設計。
+  </p>
+</section>
+
+<main class="container">
+
+  <section class="card">
+    
+
+    <div class="upload-box">
+       <h3 style="text-align:center;margin-bottom:12px;">
+         ① 上傳你的室內角落照片
+       </h3>
+
+      <p>建議拍攝：正面角度、光線清楚、包含牆面與地面。</p>
+
+      <label class="upload-label" for="imageInput">選擇室內角落照片</label>
+         <input id="imageInput" type="file" accept="image/*" />
+
+          <div class="preview" id="previewBox">
+            <img id="previewImage" alt="室內角落照片預覽" />
+          </div>
+
+        <hr style="margin:28px 0;border:none;border-top:1px dashed #d8c3aa;">
+
+          <h3 style="text-align:center;margin-bottom:8px;">
+              ② 上傳你喜歡的植物（可不傳）
+          </h3>
+
+      <p style="font-size:14px;color:#766b60;line-height:1.7;margin-top:6px;">
+          ✨ 不一定要上傳植物照片<br>
+           你可以先拍你的空間，再到園藝店拍喜歡的植物<br>
+           👉 直接測試「這盆植物放進我家會不會好看」<br>
+          讓 AI 幫你模擬最適合的綠植空間搭配 🌿
+      </p>
+
+     <label class="upload-label" for="plantInput">選擇植物照片</label>
+     <input id="plantInput" type="file" accept="image/*" />
+
+     <div class="preview" id="plantPreviewBox">
+      <img id="plantPreviewImage" alt="植物照片預覽" />
+     </div>
+
+    <div class="usage" id="usageText"></div>
+  </section>
+
+  <section class="card">
+    <h3>③ 補充你的需求</h3>
+    <textarea id="userNote" placeholder="例如：這是咖啡廳角落，希望有溫暖自然感，預算約 2000 元，不要太難照顧。"></textarea>
+
+    <button id="analyzeBtn" disabled>開始 AI 設計</button>
+    <button id="clearBtn" type="button" style="background:#b8a99a;">
+            一鍵清除，重新設計
+    </button>
+
+     <div id="retryStyleBox">
+       <h3 style="margin-top:18px;">✨ 想先指定一個風格？</h3>
+       <p class="notice">點選後，系統會自動加入需求欄，再按「開始 AI 設計」。</p>
+
+     <div class="style-actions">
+      <button onclick="tryStyle('北歐風')">北歐風</button>
+      <button onclick="tryStyle('日系自然風')">日系</button>
+      <button onclick="tryStyle('高級感')">高級感</button>
+     </div>
+    </div>
+
+
+    <div class="paywall" id="paywallBox">
+      <strong>今日免費 10 次已使用完畢。</strong>
+      <p>您可以明天再使用，或升級進階版取得更多設計次數與完整模擬服務。</p>
+      <button onclick="goPayment()">升級進階版</button>
+    </div>
+  </section>
+
+  <section class="card result" id="resultBox">
+  <h3>④ AI空間設計結果</h3>
+  <div class="result-content" id="resultContent"></div>
+
+      <div id="visualScoreBox" style="display:none;">
+    <h3>🌿 結果可視化等級</h3>
+    <div class="score-grid">
+      <div class="score-card"><strong>綠化潛力</strong><br>高</div>
+      <div class="score-card"><strong>空間美感</strong><br>★★★★☆</div>
+      <div class="score-card"><strong>照顧難度</strong><br>低～中</div>
+      <div class="score-card"><strong>適合新手</strong><br>適合</div>
+    </div>
+  </div>
+
+
+  <button id="generateImageBtn" class="premium-btn">
+    生成空間模擬圖片（進階版）
+  </button>
+
+  <div class="paywall" id="imagePaywallBox">
+    <strong>這是進階版功能。</strong>
+    <p>未來可產生「植物／花藝擺放後」的空間模擬圖片。</p>
+    <button onclick="goPayment()">升級進階版</button>
+  </div>
+  </section>
+
+  <section class="card">
+    <h3>未來進階版功能</h3>
+
+    <div class="plans">
+      <div class="plan">
+        <h4>免費版</h4>
+        <p>每日 10 次文字設計建議</p>
+      </div>
+
+      <div class="plan">
+        <h4>進階版</h4>
+        <p>提供 3 種設計方案、花材清單、預算與養護建議</p>
+      </div>
+
+      <div class="plan">
+        <h4>專業版</h4>
+        <p>AI生成空間模擬圖，展示植物或花藝擺設後的效果</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card notice">
+    <strong>使用提醒：</strong>
+    本工具產生的內容為 AI 模擬設計建議，僅供空間美感、花藝與植物佈置參考。
+    實際效果仍會受到現場光線、尺寸、植物取得情況與施工條件影響。
+  </section>
+
+</main>
+
+<footer>
+  © AI花藝訓練教練平台｜空間美感設計模組
+</footer>
+
+<script>
+  const FREE_LIMIT = 10;
+  const STORAGE_KEY = "spaceDesignerUsage";
+
+  const imageInput = document.getElementById("imageInput");
+  const previewBox = document.getElementById("previewBox");
+  const previewImage = document.getElementById("previewImage");
+  const analyzeBtn = document.getElementById("analyzeBtn");
+  const resultBox = document.getElementById("resultBox");
+  const resultContent = document.getElementById("resultContent");
+  const usageText = document.getElementById("usageText");
+  const paywallBox = document.getElementById("paywallBox");
+  const clearBtn = document.getElementById("clearBtn");
+
+  let selectedImageBase64 = "";
+  let selectedPlantBase64 = "";
+
+  const plantInput = document.getElementById("plantInput");
+  const plantPreviewBox = document.getElementById("plantPreviewBox");
+  const plantPreviewImage = document.getElementById("plantPreviewImage");
+
+  function todayKey() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function getUsageData() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      return { date: todayKey(), count: 0 };
+    }
+
+    const data = JSON.parse(raw);
+
+    if (data.date !== todayKey()) {
+      return { date: todayKey(), count: 0 };
+    }
+
+    return data;
+  }
+
+  function saveUsageData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function updateUsageText() {
+    const data = getUsageData();
+    usageText.textContent = `今日免費使用次數：${data.count} / ${FREE_LIMIT}`;
+  }
+
+  function canUseFree() {
+    const data = getUsageData();
+    return data.count < FREE_LIMIT;
+  }
+
+  function addUsage() {
+    const data = getUsageData();
+    data.count += 1;
+    saveUsageData(data);
+    updateUsageText();
+  }
+
+  imageInput.addEventListener("change", function () {
+    const file = imageInput.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      selectedImageBase64 = e.target.result;
+      previewImage.src = selectedImageBase64;
+      previewBox.style.display = "block";
+      analyzeBtn.disabled = false;
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+   plantInput.addEventListener("change", function () {
+       const file = plantInput.files[0];
+
+         if (!file) return;
+
+       const reader = new FileReader();
+
+   reader.onload = function (e) {
+        selectedPlantBase64 = e.target.result;
+    plantPreviewImage.src = selectedPlantBase64;
+    plantPreviewBox.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+
+
+  analyzeBtn.addEventListener("click", async function () {
+    if (!selectedImageBase64) {
+      alert("請先上傳照片");
+      return;
+    }
+
+    if (!canUseFree()) {
+      paywallBox.style.display = "block";
+      return;
+    }
+
+    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = "AI設計中，請稍候...";
+
+    try {
+      const userNote = document.getElementById("userNote").value.trim();
+
+      const response = await fetch("http://localhost:3000/api/analyze-space", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+        imageBase64: selectedImageBase64,
+        plantBase64: selectedPlantBase64,
+        userNote
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("AI分析失敗");
+      }
+
+      const data = await response.json();
+
+      addUsage();
+
+      resultContent.textContent = data.result || "AI尚未回傳結果。";
+
+      document.getElementById("retryStyleBox").style.display = "block";
+
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: "smooth" });
+
+    } catch (error) {
+      console.error(error);
+
+      resultContent.textContent =
+`目前無法連線到 AI 後端。
+
+如果您只是先測試前端，可以暫時使用以下示範結果：
+
+📍一、空間分析
+這個角落適合做溫暖自然風的植物佈置，可利用高低層次讓空間更有生命感。
+
+🎨二、整體設計風格
+建議採用「自然療癒風」，搭配米白、木質、綠色植物。
+
+🌱三、設計方案
+主體植物：龜背芋或橡皮樹
+輔助植物：虎尾蘭、小型黃金葛
+點綴元素：木質小椅、編織籃、暖色小燈
+
+💰四、預算建議
+約 NT$1200～3000。
+
+🌞五、養護建議
+放置於明亮散射光處，每週澆水 1 次，避免長期積水。`;
+
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: "smooth" });
+
+    } finally {
+      analyzeBtn.disabled = false;
+      analyzeBtn.textContent = "開始 AI 設計";
+    }
+  });
+
+  clearBtn.addEventListener("click", function () {
+  imageInput.value = "";
+  plantInput.value = "";
+  selectedImageBase64 = "";
+  selectedPlantBase64 = "";
+
+  previewImage.src = "";
+  plantPreviewImage.src = "";
+
+  previewBox.style.display = "none";
+  plantPreviewBox.style.display = "none";
+
+  document.getElementById("userNote").value = "";
+
+  resultContent.textContent = "";
+  resultBox.style.display = "none";
+  imagePaywallBox.style.display = "none";
+  paywallBox.style.display = "none";
+
+  const generatedImageBox = document.getElementById("generatedImageBox");
+  if (generatedImageBox) {
+    generatedImageBox.remove();
+  }
+
+  analyzeBtn.disabled = true;
+  analyzeBtn.textContent = "開始 AI 設計";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+   });
+  });
+
+
+  function goPayment() {
+    // 之後可改成綠界付款網址
+    alert("這裡之後可以串接綠界付款頁。");
+  }
+
+  const generateImageBtn = document.getElementById("generateImageBtn");
+  const imagePaywallBox = document.getElementById("imagePaywallBox");
+
+    generateImageBtn?.addEventListener("click", async function () {
+
+  const isProUser = localStorage.getItem("isProUser");
+
+  if (isProUser === "true") {
+  generateImageBtn.disabled = true;
+  generateImageBtn.textContent = "AI 空間模擬圖片生成中...";
+
+  try {
+    const userNote = document.getElementById("userNote").value.trim();
+    const designText = resultContent.textContent || "";
+
+    const response = await fetch("http://localhost:3000/api/generate-space-image", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+      imageBase64: selectedImageBase64,
+      plantBase64: selectedPlantBase64,
+      userNote,
+      designText
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("圖片生成失敗");
+    }
+
+    const data = await response.json();
+
+    let imageBox = document.getElementById("generatedImageBox");
+
+    if (!imageBox) {
+      imageBox = document.createElement("div");
+      imageBox.id = "generatedImageBox";
+      imageBox.style.marginTop = "18px";
+      imageBox.innerHTML = `
+       <h3>⑤ AI空間模擬圖片</h3>
+
+      <img id="generatedSpaceImage" 
+           style="width:100%;border-radius:18px;margin-top:12px;" />
+
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+
+         <button onclick="downloadImage()" style="flex:1">
+           下載圖片
+         </button>
+
+      <button onclick="copyIGText()" style="flex:1;background:#6f8f5f">
+          複製IG文案
+      </button>
+
+      <button onclick="openIG()" style="flex:1;background:#8f6b42">
+          前往 IG 分享
+      </button>
+
+     </div>
+    `;
+      resultBox.appendChild(imageBox);
+    }
+
+    document.getElementById("generatedSpaceImage").src = data.imageUrl;
+
+  } catch (error) {
+    console.error(error);
+    alert("AI空間模擬圖片生成失敗，請確認後端 API 是否已啟動。");
+  } finally {
+    generateImageBtn.disabled = false;
+    generateImageBtn.textContent = "生成空間模擬圖片（進階版）";
+  }
+
+  return;
+  }
+
+  imagePaywallBox.style.display = "block";
+  imagePaywallBox.scrollIntoView({ behavior: "smooth" });
+ });
+
+
+ 
+function downloadImage() {
+  const img = document.getElementById("generatedSpaceImage");
+  const link = document.createElement("a");
+  link.href = img.src;
+  link.download = "ai-space-design.png";
+  link.click();
+}
+
+  updateUsageText();
+
+function copyIGText() {
+  const design = document.getElementById("resultContent").textContent.slice(0, 60);
+
+  const text = `原本只是普通角落…
+
+AI幫我重新設計後直接升級✨
+
+👉 ${design}...
+
+真的差超多🔥
+
+#空間設計 #居家美學 #植物佈置 #療癒空間 #AI設計`;
+
+  navigator.clipboard.writeText(text);
+  alert("已複製 IG 文案！");
+}
+
+function openIG() {
+  window.open("https://www.instagram.com/", "_blank");
+}
+
+function tryStyle(styleName) {
+  const userNote = document.getElementById("userNote");
+  const oldText = userNote.value.trim();
+
+  const styleText = `請改用「${styleName}」重新設計，並維持原本空間條件與植物搭配。`;
+
+  userNote.value = oldText
+    ? `${oldText}；${styleText}`
+    : styleText;
+
+  window.scrollTo({
+    top: userNote.getBoundingClientRect().top + window.scrollY - 120,
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+</body>
+</html>
