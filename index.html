@@ -406,6 +406,53 @@
       .cta-row{flex-direction:column}
       .section{padding:58px 0}
     }
+
+     .prompt-starter-section {
+  padding: 60px 0;
+}
+
+.prompt-starter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.prompt-starter-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prompt-icon {
+  font-size: 28px;
+}
+
+.prompt-starter-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .prompt-starter-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .prompt-starter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
   </style>
 
   <script type="application/ld+json">
@@ -560,6 +607,52 @@
       </div>
     </section>
 
+      <section id="prompt-starter" class="prompt-starter-section">
+  <div class="container">
+    <h2 class="section-title">🔥 不會下指令？點一下直接開始評審</h2>
+    <p class="section-desc">
+      不知道怎麼開始？直接選一個情境，把 Prompt 複製後貼到 AI 花藝評審教練，就能開始分析作品。
+    </p>
+
+    <div class="prompt-starter-grid">
+      <div class="prompt-starter-card">
+        <div class="prompt-icon">🏆</div>
+        <h3>競賽評審模式</h3>
+        <p>適合學生練習、技能競賽、作品打分與失分分析。</p>
+        <button type="button" class="btn btn-primary" onclick="copyFloralPrompt('contest')">一鍵複製 Prompt</button>
+      </div>
+
+      <div class="prompt-starter-card">
+        <div class="prompt-icon">👨‍🏫</div>
+        <h3>老師教學模式</h3>
+        <p>把作品問題轉成學生聽得懂的教學講解與課堂任務。</p>
+        <button type="button" class="btn btn-primary" onclick="copyFloralPrompt('teacher')">一鍵複製 Prompt</button>
+      </div>
+
+      <div class="prompt-starter-card">
+        <div class="prompt-icon">🧠</div>
+        <h3>修正訓練模式</h3>
+        <p>直接找出最嚴重的問題，告訴學生下一步先改哪裡。</p>
+        <button type="button" class="btn btn-primary" onclick="copyFloralPrompt('fix')">一鍵複製 Prompt</button>
+      </div>
+
+      <div class="prompt-starter-card">
+        <div class="prompt-icon">💐</div>
+        <h3>商業花禮模式</h3>
+        <p>適合花店提案、送禮設計、作品市場感與高級感分析。</p>
+        <button type="button" class="btn btn-primary" onclick="copyFloralPrompt('market')">一鍵複製 Prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-starter-actions">
+      <a href="judge.html" class="btn btn-secondary">進入 AI 評審頁</a>
+      <a href="generate.html" class="btn btn-secondary">先做設計預演</a>
+    </div>
+  </div>
+</section>
+    
+    
+    
     <section class="section" id="features" style="padding-top:28px">
       <div class="container">
         <h2 class="section-title">新版核心功能</h2>
@@ -828,5 +921,69 @@ function addGasCounterOnce() {
 window.addEventListener("DOMContentLoaded", loadCounter);
 console.log("Floral AI Judge version:", VERSION);
 </script>
+
+  <script>
+function copyFloralPrompt(type) {
+  const prompts = {
+    contest: `請你扮演「花藝競賽評審」。
+
+我會上傳一張花藝作品照片，請依照以下方式評分：
+
+1. 主題符合度（0–10）
+2. 整體組合（0–10）
+3. 色彩表現（0–10）
+4. 花材角色（0–10）
+5. 空間動線（0–10）
+6. 創意表現（0–10）
+
+請提供：
+- 每項評分與原因
+- 三位不同評審觀點
+- 最終總分（100分制）
+- 最關鍵扣分原因
+- 修正建議
+
+請用「比賽評審語氣」。`,
+
+    teacher: `請用「老師教學模式」分析這個花藝作品。
+
+請說明：
+1. 優點
+2. 問題
+3. 為什麼
+4. 怎麼改
+5. 設計原理（學生聽得懂）
+6. 課堂練習
+7. 評分標準`,
+
+    fix: `請幫我做「作品修正訓練」。
+
+請直接告訴我：
+1. 最嚴重3個問題
+2. 扣分原因
+3. 修正順序
+4. 最優先要改的地方
+
+請用教練語氣。`,
+
+    market: `請用「商業花禮顧問」角度分析。
+
+請說明：
+1. 第一印象
+2. 市場吸引力
+3. 高級感
+4. 可販售性
+5. 如何提升價格感
+6. 客戶說明話術`
+  };
+
+  navigator.clipboard.writeText(prompts[type]).then(() => {
+    alert("✅ Prompt 已複製！直接貼到 AI 花藝評審教練使用");
+  }).catch(() => {
+    alert("❗ 複製失敗，請手動複製");
+  });
+}
+</script>
+
 </body>
 </html>
