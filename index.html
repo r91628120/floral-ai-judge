@@ -145,10 +145,18 @@
     .step-num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#f4dfe4;color:var(--rose-deep);font-weight:1000;margin-bottom:10px}
 
     .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .module-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow2);overflow:hidden}
-    .module-card::after{content:"";position:absolute;width:115px;height:115px;border-radius:50%;right:-48px;bottom:-48px;background:rgba(217,163,173,.12)}
+    .module-card{
+      position:relative;min-height:245px;display:flex;flex-direction:column;
+      background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;
+      box-shadow:var(--shadow2);overflow:hidden;transition:.18s ease;
+    }
+    .module-card:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(96,54,49,.12)}
+    .module-card::after{content:"";position:absolute;width:115px;height:115px;border-radius:50%;right:-48px;bottom:-48px;background:rgba(217,163,173,.12);pointer-events:none}
     .module-no{font-weight:1000;color:var(--gold-deep);font-size:.92rem}
     .module-card h3{margin:6px 0 8px;font-size:1.15rem}
+    .module-actions{position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:18px}
+    .module-actions .btn{padding:10px 13px;border-radius:14px;font-size:.9rem}
+    .module-link-disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
 
     .whitepaper{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;align-items:start}
     .toc{background:#fff;border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:var(--shadow2)}
@@ -299,17 +307,98 @@
     <section class="section" id="modules">
       <div class="container">
         <h2 class="section-title">九大核心模組</h2>
-        <p class="section-sub">AI Floral Designer Academy 不是單一工具，而是一套從設計、商業、材料、採購、評審到作品集的完整 AI 花藝學習系統。</p>
+        <p class="section-sub">AI Floral Designer Academy 不是單一工具，而是一套從設計、商業、材料、採購、評審到作品集的完整 AI 花藝學習系統。每一張卡片都是未來可以獨立發展的學習入口。</p>
+
         <div class="module-grid">
-          <div class="module-card"><div class="module-no">Module 01</div><h3>AI 花藝設計教練</h3><p class="muted">從題目開始推演設計方向，建立造型、比例、色彩與主題策略。</p></div>
-          <div class="module-card"><div class="module-no">Module 02</div><h3>AI 商業設計教練</h3><p class="muted">訓練預算、成本、人力、時間、物流與客戶需求判讀。</p></div>
-          <div class="module-card"><div class="module-no">Module 03</div><h3>AI 花藝材料資料庫</h3><p class="muted">建立鮮花、葉材、枝材、木材、金屬、壓克力、EVA 等材料知識。</p></div>
-          <div class="module-card"><div class="module-no">Module 04</div><h3>AI 採購模擬器</h3><p class="muted">依現場花市價格與有限預算，模擬採買、分配與剩花風險。</p></div>
-          <div class="module-card"><div class="module-no">Module 05</div><h3>AI 花藝評審教練</h3><p class="muted">依競賽評分標準分析作品，找出優勢、失分點與修正順序。</p></div>
-          <div class="module-card"><div class="module-no">Module 06</div><h3>AI 國手競賽模擬器</h3><p class="muted">模擬 WorldSkills 流程：讀題、估算、採購、施工、評分與反思。</p></div>
-          <div class="module-card"><div class="module-no">Module 07</div><h3>AI 作品集中心</h3><p class="muted">累積作品照片、評分紀錄、修正歷程與個人設計風格。</p></div>
-          <div class="module-card"><div class="module-no">Module 08</div><h3>AI 教師中心</h3><p class="muted">支援教師建立課程、講評、評量規準與學生學習歷程。</p></div>
-          <div class="module-card"><div class="module-no">Module 09</div><h3>AI 花藝研究中心</h3><p class="muted">整理 WorldSkills 趨勢、競賽講評、教材、白皮書與研究資料。</p></div>
+          <div class="module-card">
+            <div class="module-no">Module 01</div>
+            <h3>AI 花藝設計教練</h3>
+            <p class="muted">從題目開始推演設計方向，建立造型、比例、色彩與主題策略。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 02</div>
+            <h3>AI 商業設計教練</h3>
+            <p class="muted">訓練預算、成本、人力、時間、物流與客戶需求判讀。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 03</div>
+            <h3>AI 花藝材料資料庫</h3>
+            <p class="muted">建立鮮花、葉材、枝材、木材、金屬、壓克力、EVA 等材料知識。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 04</div>
+            <h3>AI 採購模擬器</h3>
+            <p class="muted">依現場花市價格與有限預算，模擬採買、分配與剩花風險。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 05</div>
+            <h3>AI 花藝評審教練</h3>
+            <p class="muted">依競賽評分標準分析作品，找出優勢、失分點與修正順序。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary" href="judge.html#features">功能介紹</a>
+              <a class="btn btn-primary" href="judge.html">立即進入</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 06</div>
+            <h3>AI 國手競賽模擬器</h3>
+            <p class="muted">模擬 WorldSkills 流程：讀題、估算、採購、施工、評分與反思。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary" href="competition.html#training">功能介紹</a>
+              <a class="btn btn-primary" href="competition.html">立即進入</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 07</div>
+            <h3>AI 作品集中心</h3>
+            <p class="muted">累積作品照片、評分紀錄、修正歷程與個人設計風格。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 08</div>
+            <h3>AI 教師中心</h3>
+            <p class="muted">支援教師建立課程、講評、評量規準與學生學習歷程。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-no">Module 09</div>
+            <h3>AI 花藝研究中心</h3>
+            <p class="muted">整理 WorldSkills 趨勢、競賽講評、教材、白皮書與研究資料。</p>
+            <div class="module-actions">
+              <a class="btn btn-secondary module-link-disabled" href="#" aria-disabled="true">功能介紹</a>
+              <a class="btn btn-primary module-link-disabled" href="#" aria-disabled="true">建置中</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -326,12 +415,14 @@
             <a href="#competency">第三章｜WorldSkills 能力模型</a>
             <a href="#modules">第四章｜九大核心模組</a>
             <a href="judge.html">第五章｜AI 花藝評審教練</a>
+            <a href="competition.html">第六章｜AI 國手競賽模擬器</a>
           </div>
           <div class="paper-card">
             <h3>白皮書核心宣言</h3>
             <p class="muted">AI 並不是取代設計師，而是協助設計師思考；AI 並不是取代教師，而是協助教師培養學生；AI 並不是給答案，而是陪伴學生完成推演、分析、修正與成長。</p>
             <div class="cta-row">
-              <a class="btn btn-primary" href="judge.html">進入 AI 花藝評審教練</a>
+              <a class="btn btn-primary" href="competition.html">進入 AI 國手競賽模擬器</a>
+              <a class="btn btn-secondary" href="judge.html">進入 AI 花藝評審教練</a>
               <a class="btn btn-secondary" href="upload-guide.html">查看上傳教學</a>
               <a class="btn btn-secondary" href="privacy.html">隱私權說明</a>
             </div>

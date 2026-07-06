@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="floral-favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI 國手競賽模擬器｜AI Floral Designer Academy</title>
+  <meta name="app-version" content="2026-07-06-competition-v1" />
+  <meta name="description" content="AI 國手競賽模擬器，協助花藝選手依全國技能競賽與 WorldSkills 流程進行讀題、設計、施工、評分與反思訓練。" />
+  <meta name="keywords" content="AI國手競賽模擬器, 花藝競賽, 全國技能競賽, WorldSkills, AI花藝設計師學院, 花藝訓練" />
+  <meta name="author" content="凡事皆正面" />
+
+  <style>
+    :root{
+      --bg:#fff8f5;--card:#fffdfb;--ink:#2e2728;--muted:#786a6b;--line:#ead6d3;
+      --soft:#fff1f2;--soft2:#f8ece9;--rose:#d9a3ad;--rose-deep:#b87986;
+      --gold:#cba66b;--gold-deep:#9c7440;--green:#6f8066;--green-soft:#eef6ec;
+      --blue:#64788f;--shadow:0 24px 70px rgba(96,54,49,.12);--shadow2:0 12px 32px rgba(96,54,49,.08);
+      --radius:26px;--max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+      color:var(--ink);line-height:1.78;
+      background:radial-gradient(circle at 9% 4%, rgba(203,166,107,.19), transparent 30%),radial-gradient(circle at 92% 8%, rgba(217,163,173,.27), transparent 29%),linear-gradient(180deg,#fffafa 0%, var(--bg) 45%, #f7eeee 100%);
+    }
+    a{text-decoration:none;color:inherit}.container{max-width:var(--max);margin:0 auto;padding:0 24px}.section{padding:72px 0}.muted{color:var(--muted)}
+    .nav{position:sticky;top:0;z-index:80;backdrop-filter:blur(18px);background:rgba(255,248,247,.86);border-bottom:1px solid rgba(234,214,211,.86)}
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:13px;font-weight:1000}.brand-mark{width:50px;height:50px;border-radius:18px;background:linear-gradient(135deg,#f3dfe4,#d9b27f 58%,#b87986);display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:var(--shadow2)}
+    .brand-text{line-height:1.14}.brand-text small{display:block;color:var(--muted);font-weight:750;font-size:.78rem}.nav-links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.nav-links a{color:var(--muted);font-weight:900;font-size:.94rem}.nav-links a:hover{color:var(--ink)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:16px;padding:13px 19px;font-weight:1000;border:1px solid transparent;cursor:pointer;transition:.18s ease;line-height:1.25}.btn:hover{transform:translateY(-1px)}
+    .btn-primary{color:#fff;background:linear-gradient(135deg,var(--gold),var(--rose-deep));box-shadow:var(--shadow2)}.btn-secondary{background:#fff;border-color:var(--line);color:var(--ink)}.btn-secondary:hover{background:var(--soft)}.btn-green{color:#fff;background:linear-gradient(135deg,#7f9f73,#4f7b59);box-shadow:var(--shadow2)}
+    .hero{padding:34px 0 38px}.hero-card{position:relative;overflow:hidden;border-radius:38px;border:1px solid var(--line);background:linear-gradient(135deg, rgba(255,253,251,.98), rgba(249,238,236,.96));box-shadow:var(--shadow);padding:52px 46px;display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}.hero-card::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-125px;bottom:-135px;background:radial-gradient(circle, rgba(217,163,173,.24), transparent 66%);pointer-events:none}
+    .badge{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 14px;background:linear-gradient(180deg,#f8e8ec,#f4dde2);border:1px solid #e9c6ce;color:var(--rose-deep);font-size:.92rem;font-weight:1000}
+    .hero-title{margin:18px 0 12px;font-size:clamp(2.3rem,4.6vw,4.7rem);line-height:1.04;letter-spacing:-.055em;font-weight:1000}.hero-sub{margin:0 0 14px;font-size:clamp(1.08rem,2vw,1.48rem);color:var(--rose-deep);font-weight:950;line-height:1.45}.lead{max-width:680px;color:var(--muted);font-size:1.06rem}.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}.hero-note{margin-top:18px;color:var(--muted);font-size:.95rem}
+    .panel{position:relative;z-index:1;background:#fff;border:1px solid #ead9dc;border-radius:30px;padding:22px;box-shadow:0 18px 42px rgba(0,0,0,.07)}.panel-title{font-weight:1000;background:linear-gradient(90deg,#b87986,#cba66b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini-card{border:1px solid var(--line);border-radius:20px;padding:15px;background:#fff9f9}.mini-card b{font-size:1.15rem;color:var(--rose-deep)}.mini-card span{display:block;color:var(--muted);font-size:.92rem}.flow{margin-top:14px;display:grid;gap:8px}.flow div{background:#fff7ef;border:1px solid #ead8bd;border-radius:14px;padding:10px 12px;font-weight:900;color:#6d565b}
+    .section-title{margin:0 0 12px;font-size:clamp(1.75rem,3vw,2.55rem);line-height:1.2;letter-spacing:-.03em}.section-sub{margin:0 0 28px;color:var(--muted);max-width:850px}.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:rgba(255,253,251,.94);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow2);padding:24px}.card h3{margin:0 0 8px;font-size:1.18rem}.icon{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(180deg,#f8e7ec,#f3d9df);color:var(--rose-deep);font-size:24px;margin-bottom:12px}
+    .simulator{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:start}.form-card,.result-card{background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow2);padding:24px}.form-group{margin-bottom:16px}.form-group label{display:block;font-weight:1000;margin-bottom:7px}.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid var(--line);background:#fffdfb;border-radius:16px;padding:12px 13px;font:inherit;color:var(--ink);outline:none}.form-group textarea{min-height:102px;resize:vertical}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#d9a3ad;box-shadow:0 0 0 4px rgba(217,163,173,.15)}.quick-row{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#fff7f8;border-radius:999px;padding:7px 10px;font-size:.88rem;font-weight:850;color:var(--muted);cursor:pointer}.chip:hover{background:#f8e7ec;color:var(--rose-deep)}
+    .result-box{background:#fffafb;border:1px dashed #e2bdc5;border-radius:20px;padding:18px;white-space:pre-wrap;min-height:360px;color:#514247}.result-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.tip{border-left:4px solid var(--rose);background:#fff7f8;border-radius:16px;padding:14px 16px;color:#695057;margin-top:16px}.module-list{display:grid;gap:12px}.module-list div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px}.module-list b{color:var(--rose-deep)}
+    .footer{padding:32px 0 54px;color:var(--muted);font-size:.94rem}.footer-line{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid var(--line);padding-top:18px}
+    @media (max-width:980px){.hero-card,.grid-2,.grid-3,.simulator{grid-template-columns:1fr}.hero-card{padding:36px 24px}.nav-inner{flex-wrap:wrap}.nav-links{gap:14px}}
+    @media (max-width:640px){.container,.nav-inner{padding-left:18px;padding-right:18px}.brand-mark{width:42px;height:42px;border-radius:15px}.brand-text small{font-size:.72rem}.hero{padding-top:22px}.mini-grid{grid-template-columns:1fr}.btn{width:100%}.cta-row,.result-actions{flex-direction:column}.section{padding:58px 0}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="返回 AI Floral Designer Academy 首頁">
+        <div class="brand-mark">❀</div>
+        <div class="brand-text">AI Floral Designer Academy<small>Module 06｜AI 國手競賽模擬器</small></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">首頁</a><a href="#simulator">開始模擬</a><a href="#training">訓練流程</a><a href="#topics">題庫方向</a><a class="btn btn-primary" href="judge.html">AI 評審教練</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero-card">
+        <div>
+          <span class="badge">WorldSkills Flow｜讀題・設計・施工・評分・反思</span>
+          <h1 class="hero-title">AI 國手競賽模擬器</h1>
+          <p class="hero-sub">把全國技能競賽花藝職類，轉化為可練習、可推演、可修正的 AI 備賽系統。</p>
+          <p class="lead">本模組協助學生依競賽項目進行讀題分析、主題詮釋、設計策略、花材配置、技術風險、時間分配與評分重點推演，特別適合神秘箱與 WorldSkills 型競賽訓練。</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#simulator">開始一次競賽推演</a>
+            <a class="btn btn-secondary" href="#topics">查看可能題目方向</a>
+            <a class="btn btn-secondary" href="judge.html">作品完成後進入評審</a>
+          </div>
+          <div class="hero-note">核心精神：不是直接給答案，而是訓練學生在有限時間、有限材料、未知主題下，做出合理且有競賽分數意識的設計決策。</div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Module 06 訓練模型</div>
+          <div class="mini-grid">
+            <div class="mini-card"><b>Design 60%</b><span>主題、比例、色彩、材料、創意、空間與造型語言</span></div>
+            <div class="mini-card"><b>Execution 40%</b><span>穩定、牢固、保鮮、技巧、時間、整潔與安全</span></div>
+          </div>
+          <div class="flow">
+            <div>1｜讀題：找出主題關鍵字與限制</div>
+            <div>2｜決策：設定造型、色彩、材料與結構</div>
+            <div>3｜施工：規劃時間、技法與風險控管</div>
+            <div>4｜評分：預測失分點並修正</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="simulator">
+      <div class="container">
+        <h2 class="section-title">競賽推演工作台</h2>
+        <p class="section-sub">輸入競賽項目、主題與限制後，系統會自動產生一份可貼到 AI 花藝教練或 ChatGPT 的完整訓練 Prompt。</p>
+        <div class="simulator">
+          <div class="form-card">
+            <div class="form-group"><label for="eventType">競賽項目</label><select id="eventType"><option>神秘箱（一）｜60分鐘</option><option>切花設計｜90分鐘</option><option>花束設計｜90分鐘</option><option>壁飾設計｜120分鐘</option><option>組合盆栽｜90分鐘</option><option>神秘箱（二）｜180分鐘</option><option>花環｜120分鐘</option><option>物件裝飾｜90分鐘</option><option>神秘箱（三）｜180分鐘</option></select></div>
+            <div class="form-group"><label for="theme">題目／主題</label><input id="theme" placeholder="例：永續未來、自然共生、希望、科技與自然" /></div>
+            <div class="form-group"><label>快速主題</label><div class="quick-row"><button class="chip" onclick="setTheme('永續未來')">永續未來</button><button class="chip" onclick="setTheme('自然共生')">自然共生</button><button class="chip" onclick="setTheme('希望與生命力')">希望與生命力</button><button class="chip" onclick="setTheme('科技與自然')">科技與自然</button><button class="chip" onclick="setTheme('城市療癒')">城市療癒</button><button class="chip" onclick="setTheme('循環再生')">循環再生</button></div></div>
+            <div class="form-group"><label for="materials">花材／資材條件</label><textarea id="materials" placeholder="例：大會提供玫瑰、火鶴、文心蘭、尤加利、藤材、試管、麻繩、玻璃紙。若未知可填：依大會現場材料。">依大會現場材料</textarea></div>
+            <div class="form-group"><label for="limits">尺寸／展示／限制條件</label><textarea id="limits" placeholder="例：作品需一人可移動、放於展示桌、不得超出工作區、需考慮保鮮與安全。">作品需一人可移動，材料需合理使用，須注意穩定度、保鮮、時間掌握與工作安全。</textarea></div>
+            <div class="form-group"><label for="level">訓練強度</label><select id="level"><option>競賽備戰模式｜嚴格</option><option>課堂練習模式｜教學</option><option>初學引導模式｜基礎</option><option>國手選拔模式｜高壓</option></select></div>
+            <button class="btn btn-primary" onclick="generatePrompt()">產生競賽推演 Prompt</button>
+          </div>
+          <div class="result-card">
+            <h3>產生結果</h3>
+            <div id="result" class="result-box">請先填寫左側資料，按下「產生競賽推演 Prompt」。</div>
+            <div class="result-actions"><button class="btn btn-primary" onclick="copyResult()">複製 Prompt</button><button class="btn btn-secondary" onclick="clearResult()">清除</button><a class="btn btn-secondary" href="judge.html">作品完成後評審</a></div>
+            <div class="tip">建議用法：把這份 Prompt 貼到 ChatGPT 或 AI 花藝教練，先產生設計草圖方向；學生完成作品後，再用 AI 花藝評審教練分析失分點。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="training">
+      <div class="container">
+        <h2 class="section-title">學生訓練流程</h2>
+        <p class="section-sub">這個模組最適合搭配每日練習，每次練一個題目，讓學生建立「讀題→設計→施工→評分→修正」的肌肉記憶。</p>
+        <div class="grid-3">
+          <div class="card"><div class="icon">🧭</div><h3>10分鐘讀題</h3><p class="muted">圈出主題關鍵字、作品用途、展示方式、限制條件與可能評分重點。</p></div>
+          <div class="card"><div class="icon">✏️</div><h3>15分鐘草圖</h3><p class="muted">先決定造型、重心、焦點、色彩主調與花材角色，不急著動手。</p></div>
+          <div class="card"><div class="icon">🛠</div><h3>限時施工</h3><p class="muted">依項目設定 60、90、120 或 180 分鐘完成，訓練時間壓力與材料取捨。</p></div>
+          <div class="card"><div class="icon">⚖️</div><h3>AI 預評</h3><p class="muted">用評分標準檢查設計60%與施工40%，找出最可能失分的位置。</p></div>
+          <div class="card"><div class="icon">🔁</div><h3>二次修正</h3><p class="muted">只修前三大問題：重心、焦點、層次、穩定、保鮮或主題不清。</p></div>
+          <div class="card"><div class="icon">📒</div><h3>建立作品紀錄</h3><p class="muted">保留題目、草圖、照片、AI講評與老師建議，累積個人競賽資料庫。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="topics">
+      <div class="container">
+        <h2 class="section-title">高機率命題方向</h2>
+        <p class="section-sub">以下不是保證考題，而是依競賽形式、評分重點與 WorldSkills 趨勢整理出的練習方向。</p>
+        <div class="grid-2">
+          <div class="card"><h3>主題方向</h3><div class="module-list"><div><b>永續環保：</b>永續未來、循環再生、地球的呼吸</div><div><b>自然共生：</b>森林、海洋、城市花園、生命之樹</div><div><b>情感敘事：</b>希望、感謝、祝福、勇氣、重逢</div><div><b>科技未來：</b>AI花園、數位森林、科技與自然</div><div><b>療癒生活：</b>城市療癒、居家綠意、慢生活</div></div></div>
+          <div class="card"><h3>技術方向</h3><div class="module-list"><div><b>結構：</b>試管、鐵絲、木材、麻繩、懸掛與支撐</div><div><b>造型：</b>不對稱、線性、水平、垂直、自由構成</div><div><b>色彩：</b>同色系、對比色、明暗層次、主色與輔色</div><div><b>保鮮：</b>水分供應、切口處理、花材維護與可展示性</div><div><b>安全：</b>牢固、可搬動、不易傾倒、不傷人</div></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-line"><div>AI Floral Designer Academy｜Module 06 AI 國手競賽模擬器｜© 2026 凡事皆正面｜版本 v2026-07-06-competition-v1<br><a href="privacy.html" style="color:#b97c88;font-weight:900;">🔒 隱私權與資料說明</a></div><div>建議搭配 AI 花藝評審教練與教師現場講評使用。</div></div></div>
+  </footer>
+
+  <script>
+    function setTheme(text){document.getElementById('theme').value=text;}
+    function generatePrompt(){
+      const eventType=document.getElementById('eventType').value;
+      const theme=document.getElementById('theme').value.trim() || '請 AI 協助設定一個符合花藝競賽的主題';
+      const materials=document.getElementById('materials').value.trim() || '依大會現場材料';
+      const limits=document.getElementById('limits').value.trim() || '作品需一人可移動，注意穩定度、保鮮、時間掌握與工作安全。';
+      const level=document.getElementById('level').value;
+      const prompt=`請你扮演「WorldSkills 花藝國手競賽教練」與「全國技能競賽花藝職類評審」。\n\n【競賽項目】\n${eventType}\n\n【題目／主題】\n${theme}\n\n【花材／資材條件】\n${materials}\n\n【尺寸／展示／限制條件】\n${limits}\n\n【訓練強度】\n${level}\n\n請依照以下格式協助我做完整競賽推演：\n\n一、讀題分析\n1. 主題關鍵字\n2. 作品應傳達的情緒與意象\n3. 可能的評分焦點\n4. 最容易誤解題目的地方\n\n二、設計方向建議\n1. 建議造型\n2. 焦點位置\n3. 線條與空間配置\n4. 色彩策略\n5. 花材角色分配：主花、配花、線條花材、葉材、資材\n\n三、施工與時間分配\n1. 前10分鐘要完成什麼\n2. 中段施工重點\n3. 最後15分鐘檢查項目\n4. 若時間不足，應優先保住哪些分數\n\n四、競賽評分預測\n請依「設計60%、施工40%」分析：\n1. 整體組合\n2. 主題呈現\n3. 色彩配置\n4. 創意表現\n5. 作品穩定與牢固\n6. 花材保鮮與維護\n7. 工作崗位與安全\n\n五、前三大失分風險\n請直接指出最可能扣分的三個地方，並提供修正方式。\n\n六、學生練習任務\n請給我一份可在課堂或賽前練習使用的任務清單。\n\n請用「嚴格但鼓勵」的教練語氣回答。`;
+      document.getElementById('result').textContent=prompt;
+    }
+    function copyResult(){
+      const text=document.getElementById('result').textContent;
+      navigator.clipboard.writeText(text).then(()=>alert('✅ Prompt 已複製，可以貼到 ChatGPT 或 AI 花藝教練使用。')).catch(()=>alert('❗ 複製失敗，請手動選取複製。'));
+    }
+    function clearResult(){document.getElementById('result').textContent='請先填寫左側資料，按下「產生競賽推演 Prompt」。';}
+  </script>
+</body>
+</html>
