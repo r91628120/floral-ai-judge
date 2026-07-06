@@ -454,6 +454,38 @@
 }
 
 
+
+    .module-menu{position:relative}
+    .module-menu-button{
+      border:1px solid var(--line);background:#fff;color:var(--ink);
+      border-radius:16px;padding:11px 14px;font-weight:1000;cursor:pointer;
+      font:inherit;line-height:1.2;
+    }
+    .module-dropdown{
+      position:absolute;right:0;top:calc(100% + 10px);width:320px;
+      background:#fff;border:1px solid var(--line);border-radius:22px;
+      box-shadow:var(--shadow2);padding:10px;display:none;z-index:100;
+    }
+    .module-menu:hover .module-dropdown,
+    .module-menu:focus-within .module-dropdown{display:grid;gap:6px}
+    .module-dropdown a,.module-dropdown span{
+      display:block;padding:10px 12px;border-radius:14px;font-weight:900;
+      color:var(--muted);font-size:.92rem;
+    }
+    .module-dropdown a:hover{background:var(--soft);color:var(--ink)}
+    .module-dropdown span{opacity:.52}
+    .home-button{background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 14px;color:var(--ink)!important}
+    .footer-modules{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .footer-modules a,.footer-modules span{
+      border:1px solid var(--line);border-radius:999px;padding:6px 10px;
+      background:#fff;color:var(--muted);font-weight:850;font-size:.86rem;
+    }
+    .footer-modules span{opacity:.5}
+    @media (max-width:640px){
+      .module-dropdown{position:static;width:100%;margin-top:8px}
+      .module-menu,.module-menu-button{width:100%}
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -485,20 +517,31 @@
       </a>
 
       <div class="nav-links">
-        
+
+        <a class="home-button" href="index.html">回首頁</a>
+        <div class="module-menu">
+          <button class="module-menu-button" type="button">九大模組 ▾</button>
+          <div class="module-dropdown" aria-label="九大模組入口">
+            <span>Module 01｜AI 花藝設計教練（建置中）</span>
+            <span>Module 02｜AI 商業設計教練（建置中）</span>
+            <span>Module 03｜AI 花藝材料資料庫（建置中）</span>
+            <span>Module 04｜AI 採購模擬器（建置中）</span>
+            <a href="judge.html">Module 05｜AI 花藝評審教練</a>
+            <a href="competition.html">Module 06｜AI 國手競賽模擬器</a>
+            <span>Module 07｜AI 作品集中心（建置中）</span>
+            <span>Module 08｜AI 教師中心（建置中）</span>
+            <span>Module 09｜AI 花藝研究中心（建置中）</span>
+          </div>
+        </div>
         <a href="#prompt-starter">快速指令</a>
-        <a href="#value">核心價值</a>
         <a href="#features">功能</a>
         <a href="#workflow">流程</a>
-        <a href="#sample">示範</a>
-        <a href="#teacher">教師模式</a>
         <a class="btn btn-primary"
            href="https://chatgpt.com/g/g-69cd22b183548191bb183c5349d9cc3a-aihua-yi-ping-shen-jiao-lian"
            target="_blank"
            rel="noopener noreferrer"
-           onclick="addGasCounterOnce()">
-            立即開始
-        </a>
+           onclick="addGasCounterOnce()">立即開始</a>
+
       </div>
     </div>
   </nav>
@@ -878,6 +921,12 @@
         <div>
           AI花藝評審教練平台｜Floral AI Judge｜© 2026 凡事皆正面｜版本 v2026-04-29-firebase-v5<br>
           <a href="privacy.html" style="color:#b97c88;font-weight:900;">🔒 隱私權與資料說明</a>
+          <div class="footer-modules" aria-label="九大模組快速入口">
+            <span>M01 設計教練</span><span>M02 商業教練</span><span>M03 材料庫</span><span>M04 採購模擬</span>
+            <a href="judge.html">M05 評審教練</a><a href="competition.html">M06 國手競賽</a>
+            <span>M07 作品集</span><span>M08 教師中心</span><span>M09 研究中心</span>
+          </div>
+
         </div>
         <div>建議搭配六視角照片與競賽題目使用，以獲得更完整準確的分析結果。</div>
       </div>
